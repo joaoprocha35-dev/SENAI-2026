@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-image: linear-gradient(to bottom, blue, black);
+            height: 100%;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .calc {
+            background-color: rgb(31, 88, 138);
+            padding: 100px;
+            padding-left: 100px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0, 1);
+            text-align: center;
+        }
+
+        .cal input {
+            width: 100px;
+            padding: 5px;
+            margin: 5px;
+            font-size: 1em;
+        }
+        
+        .botao{
+
+            margin-top: 20px;
+        }
+
+        .calc button {
+            padding: 7px 15px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: blue;
+            color: aliceblue;
+        }
+
+        #resultado {
+            margin-top: 1.5em;
+            font-size: 1.4em;
+            min-height: 1.4em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="calc">
+        <h2> Calculadora</h2>
+
+        <div>
+            <input type="number" id="n1">
+            <input type="number" id="n2">
+
+        </div>
+
+        <div class="botao">
+            <div class="botao">
+                <button id="adicao">+</button>
+                <button id="subtrair">-</button>
+                <button id="dividir">/</button>
+                <button id="multiplicar">*</button>
+            </div>
+        </div>
+        <div id="resultado"></div>
+
+    </div>
+
+        <script>
+            var n1 = document.getElementById("n1")
+            var n2 = document.getElementById("n2")
+            var res = document.getElementById("resultado")
+
+            document.getElementById("adicao").addEventListener("click", adicao);
+            document.getElementById("subtrair").addEventListener("click", subtrair);
+            document.getElementById("dividir").addEventListener("click", dividir);
+            document.getElementById("multiplicar").addEventListener("click", multiplicar);
+         
+            function adicao(){
+                resultado.innerText=Number(n1.value)+Number(n2.value)
+            }
+
+            function subtrair(){
+                resultado.innerText=Number(n1.value)-Number(n2.value)
+            }
+             function dividir(){
+                resultado.innerText=Number(n1.value)/Number(n2.value)
+            }
+             function multiplicar(){
+                resultado.innerText=Number(n1.value)*Number(n2.value||1)
+            }
+
+
+        </script>
+
+    
+</body>
+
+</html>

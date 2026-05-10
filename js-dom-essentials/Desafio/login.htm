@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css-style.css">
+    <title>Login</title>
+</head>
+
+<body>
+
+    <div id="container-login">
+        <H1 id="titulo1">Login</H1>
+
+        <input type="email" name="email" id="email" placeholder="Digite seu Email:" required>
+        <input type="password" name="senha" id="senha" placeholder="Digite sua Senha:" required>
+
+        <button id="botaoEntrar">Entrar</button>
+
+    </div>
+
+    <script>
+            var email = document.getElementById("email")
+            var senha = document.getElementById("senha")
+            var botao = document.getElementById('botaoEntrar');
+
+            botao.addEventListener('click', () => {
+
+                if (email.value === "adim" && senha.value === "123") {
+                    window.location.href = "painel.html";
+                }
+                else {
+                    alert("Email ou senha incorreto!");
+                }
+
+            }
+        )
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>painel-mensagens</title>
+    <style>
+        h1{
+            font-variant: small-caps;
+            margin-left: 30px;
+        }
+        * {
+            justify-self: center;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        #painel {
+            border: 5px solid rgba(255, 0, 183, 0.312);
+            padding: 16px;
+            width: 200px;
+            height: 200px;
+            margin-left: 30px;
+            background-color: rgba(88, 114, 166, 0.38);
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1 id="titulo">Painel de Mensagens</h1>
+    <div id="painel">
+        <p class="msg">Mensagem A</p>
+        <p class="msg">Mensagem B</p>
+        <p class="msg">Mensagem C</p>
+    </div>
+
+    <button onclick="modificarTitulo()">Trocar Título</button>
+    <button onclick="modificarMensagem()">Modificar Uma Mensagem</button>
+    <button onclick="destacarMensagens()">Destacar Mensagens</button>
+
+    <script>
+        function modificarTitulo() {
+            document.getElementById('titulo').
+                innerText = prompt("Digite um novo titulo...")
+        }
+
+        function modificarMensagem() {
+            var modificar = prompt("Qual parágrafo deseja modificar?")
+            document.getElementsByTagName("p")[modificar - 1].innerText = prompt("Digite o texto a ser alterado")
+        }
+
+        function destacarMensagens() {
+            var mens = document.querySelectorAll(".msg")
+            for (var msg of mens) {
+                msg.style.background = "yellow"
+                msg.style.fontSize = "30px"
+            }
+        }
+
+    </script>
+</body>
+
+</html>

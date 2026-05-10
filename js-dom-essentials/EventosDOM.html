@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos DOM</title>
+    <style>
+        div#area{
+            font: normal 16pt Arial;
+            background: rgb(42, 139, 42);
+            color: white;
+            width: 200px;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body onload="incializar()">
+    <h1 id="mensagem-inicial">Aguardando a página carregar...</h1>
+
+    <select id="selecao-curso" onchange="mudarSelecao()" >
+        <option value="Front-End">Front-End</option>
+        <option value="Back-End">Back-End</option>
+        <option value="Full-Stack">Full-Stack</option>
+    </select>
+
+    <p id="resultado-selecao"></p>
+
+    <div onclick="botao()" id="area" onmouseenter="entrar()" onmouseout="sair()" >
+        Interagir!
+    </div>
+
+    <input type="text" id="campo-tecla" onkeydown="registrarTecla(event)">
+
+    <p id="tecla-registrada"></p>
+
+    <!-- Crie uma funcao clicar() onde cada vez que clicarmos na caixinha ela mudará para o texto "clicou -->
+     <script>
+
+       
+
+        function botao(){
+            document.getElementById("area").innerText = "Clicou!";
+        }
+        //     const area = document.getElementById("area");
+        //     area.innerText = "Clicou!";
+     </script>
+     <!-- Crie uma funcao clicar() onde cada vez que clicarmos na caixinha ela mudará para o texto "clicou" e a cor da caixa mudará para vermelho-->
+      <script>
+        function botao(){
+            document.getElementById("area").innerText = "Clicou!";
+            document.getElementById("area").style.backgroundColor = "red";
+        }
+      </script>
+
+     <!-- Crie duas funcoes em JS: entrar() e sair()-->
+
+     <script>
+        var area = document.getElementById("area")
+        function entrar(){
+          area.innerText="Entrou!"
+          area.style.backgroundColor="blue"
+        }
+
+        function sair(){
+            area.innerText="Saiu!"
+             area.style.backgroundColor="rgb(42, 139, 42)";
+
+        }
+
+         function incializar(){
+            document.getElementById("mensagem-inicial").innerText = "Página Carregada! JS executado com sucesso."
+            document.getElementById("mensagem-inicial").style.color = "green";
+        }
+
+        function mudarSelecao(){
+            var selecao = document.getElementById("selecao-curso")
+            var resultado = document.getElementById("resultado-selecao")
+            resultado.innerText="Voce selecionou o curso de: " +selecao.value
+        }
+
+        function registrarTecla(event){
+            var registrar = document.getElementById("tecla-registrada")
+            registrar.innerText="Última tecla pressionada: " +event.key
+        }
+     </script>
+
+
+</body>
+</html>

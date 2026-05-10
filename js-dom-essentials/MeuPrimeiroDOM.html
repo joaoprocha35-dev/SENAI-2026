@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manipulação do DOM</title>
+</head>
+<body>
+    <p id="p1">Texto Original</p>
+    <button onclick="alterar()">Alterar Texto</button>
+    <script>
+        function alterar() {
+            document.getElementById("p1").innerText = "Texto Alterado";
+        }          
+    </script>
+
+
+    <p class="meup1">Texto Original</p>
+    <button onclick="alterar2()">Alterar Texto</button>
+    <script>
+        function alterar2() {
+            document.getElementsByClassName("meup1")[0].innerText = "Texto Alterado";
+        }
+    </script>
+
+
+    <p>Texto Original</p>
+    <button onclick="alterar3()">Alterar Texto</button>
+    <script>
+        function alterar3(){
+            document.getElementsByTagName("p")[2].innerText = "Texto Alterado";
+        }
+    </script>
+
+    <p id="p2">Texto Original 1</p>
+    <p id="p3">Texto Original 2</p>
+    <button onclick="alterar4()">Alterar Texto</button>
+    <script>
+        function alterar4(){
+            document.querySelectorAll("#p2, #p3").forEach(
+                elemento=>{elemento.innerText = "Texto Alterado 2 vezes";})
+}
+    </script>
+</body>
+</html>

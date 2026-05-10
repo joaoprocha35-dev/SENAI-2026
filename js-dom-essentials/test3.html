@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manipulação da Estilização</title>
+    <style>
+        #div1 {
+            border: 5px solid rgba(255, 0, 183, 0.312);
+            padding: 16px;
+            width: 200px;
+            height: 200px;
+            margin-left: 30px;
+            background-color: rgba(88, 114, 166, 0.38);
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="titulo1">Modelo de Documento de Objeto</h1>
+    <h2 id="titulo2">Elementos do DOM</h2>
+     <button onclick="estilo1()">Modificar a Estilização</button>
+ 
+
+    <div id="div1">
+        <p>Parágrafo 1</p>
+        <p>Parágrafo 2</p>
+        <p class="p2" onmouseenter="destacarParagrafo()" >Parágrafo 3</p>
+    </div>
+
+    <button onclick="modificarDiv1()">Modificar o elemento da div</button>
+
+    <script>
+
+        function modificarDiv1() {
+            const elementodiv = document.getElementById("div1")
+            const paragrafos = elementodiv.getElementsByTagName("p")
+            paragrafos[2].style.fontSize="24px"
+        }
+
+        function estilo1(){
+            document.getElementById('titulo1').style.fontSize=prompt("Digite o tamanho desejado para o título 1")
+            document.getElementById('titulo1').style.color=prompt("Digite a cor que deseja alterar para o título 1")
+        }
+
+        // function estilo2(){
+        //     document.getElementById("titulo2").style.fontSize=prompt("Digite o tamanho desejado para o título 2")
+        //     document.getElementById ("titulo2").style.color=prompt("Digite a cor que deseja alterar para o título 2")
+        // }
+        function destacarParagrafo(){
+            var parag = document.querySelectorAll(".p2")
+            for(var msg of parag){
+                msg.style.color="blue"
+                msg.style.fontSize="1.2em"
+            }
+        }
+
+        //*Através do addEvent, o escutador, para chamar o evento para o clicar e as funções para cada botão
+        
+
+
+    </script>
+</body>
+
+</html>

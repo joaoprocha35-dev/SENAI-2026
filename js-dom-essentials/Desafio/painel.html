@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>painel</title>
+    <style>
+        /* Configurações Gerais e Variáveis */
+:root {
+    --primary-color: #4f46e5;
+    --danger-color: #ef4444;
+    --bg-light: #f8fafc;
+    --text-main: #1e293b;
+    --header-bg: #ffffff;
+    
+    /* Dark Mode Variables */
+    --bg-dark: #0f172a;
+    --text-dark: #f8fafc;
+    --card-dark: #1e293b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all 0.3s ease; /* Transição suave para TUDO */
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-main);
+    min-height: 100vh;
+}
+
+/* Header Estilizado */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10%;
+    background-color: var(--header-bg);
+    height: 85px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.relogio {
+    font-family: 'Courier New', Courier, monospace; /* Estilo digital */
+    font-weight: bold;
+    letter-spacing: 2px;
+    border-radius: 12px;
+    padding: 10px 25px;
+    font-size: 28px;
+    color: #fff;
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    min-width: 160px;
+}
+
+.mudartema {
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    border: none;
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+}
+
+.mudartema:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+/* Conteúdo Principal */
+main {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+}
+
+.list {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+input {
+    flex: 1;
+    height: 50px;
+    padding: 0 15px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
+#add {
+    background-color: #10b981; /* Verde moderno */
+    color: white;
+    border: none;
+    padding: 0 25px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#add:hover {
+    background-color: #059669;
+}
+
+small {
+    display: block;
+    color: #64748b;
+    margin-bottom: 25px;
+    font-style: italic;
+}
+
+/* Lista de Tarefas */
+#lista {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: #f1f5f9;
+    margin-bottom: 10px;
+    padding: 15px 20px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    border-left: 5px solid var(--primary-color);
+    font-weight: 500;
+}
+
+li:hover {
+    background: #fee2e2; /* Vermelho claro ao passar o mouse para indicar remoção */
+    border-left-color: var(--danger-color);
+    transform: scale(1.02);
+}
+
+/* Totalizador */
+#totalPontos {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px dashed #e2e8f0;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--primary-color);
+    text-align: right;
+}
+
+/* Dark Mode Estilizado */
+body.dark {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+}
+
+body.dark header {
+    background-color: var(--card-dark);
+}
+
+body.dark main {
+    background-color: var(--card-dark);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+body.dark li {
+    background-color: #334155;
+    color: white;
+}
+
+body.dark input {
+    background-color: #0f172a;
+    border-color: #334155;
+    color: white;
+}
+    </style>
+</head>
+<body>
+    <!-- relogio superior esquerdo / mudar tema superior direito -->
+    <!-- ToDo List / html-10 css-5 / soma final -->
+    <header>
+        <div class="relogio" id="relogio">
+            
+        </div>
+        <button class="mudartema" id="mudartema">Alterar Tema</button>
+    </header>
+
+    <main>
+        <div class="list">
+            <input id="tarefa" placeholder="Digite uma tarefa">
+            <input id="pontos" placeholder="Pontos">
+            <button id="add">Adicionar</button>
+        </div>
+        <small>Clique em um item para remover</small>
+        <ul id="lista">
+            <p id="totalPontos">Total de Pontos: 0</p>
+        </ul>
+    </main>
+
+    <script>
+        var relogio = document.getElementById("relogio")
+
+        function atualizarRelogio(){
+            var agora = new Date()
+            var h = String(agora.getHours()).padStart(2, '0')
+            var m = String(agora.getMinutes()).padStart(2, '0')
+            var s = String(agora.getSeconds()).padStart(2, '0')
+
+            relogio.innerText = `${h}:${m}:${s}`
+        }
+        atualizarRelogio()
+        setInterval(atualizarRelogio, 1000)
+
+        var botaoTema = document.getElementById("mudartema")
+        botaoTema.addEventListener("click", alterarTema)
+        function alterarTema(){
+            document.body.classList.toggle("dark")
+        }
+
+
+        var input = document.getElementById("tarefa")
+        var pontosValor = document.getElementById("pontos")
+        var botao = document.getElementById("add")
+        var lista = document.getElementById("lista")
+        var totalPontosElementos = document.getElementById("totalPontos")
+        var totalPontos = 0
+
+        function adicionar(){
+
+            var texto = input.value.trim()
+            var pontos = Number(pontosValor.value)
+
+            if (texto === "" || pontos <= 0) return
+
+            var li = document.createElement("li")
+            li.innerText = texto + " - " + pontos + " pontos" 
+            li.dataset.pontos = pontos 
+
+            lista.appendChild(li)
+
+            totalPontos += pontos
+            totalPontosElementos.innerText = "Total de Pontos: " + totalPontos 
+
+            input.value = ""        
+            pontosValor.value = ""  
+        }
+
+        botao.addEventListener("click", adicionar)
+
+        lista.addEventListener("click", function(event){
+            if(event.target.tagName === "LI"){
+                var pontos = Number(event.target.dataset.pontos)
+                totalPontos -= pontos
+                totalPontosElementos.innerText = "Total de Pontos: " + totalPontos             
+                event.target.remove()    
+            }
+        })
+
+
+    </script>
+</body>

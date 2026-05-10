@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* Gradiente moderno para dar profundidade */
+    background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+}
+
+#container-login {
+    /* Efeito de Vidro (Glassmorphism) */
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    
+    width: 380px;
+    padding: 40px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    letter-spacing: -1px;
+}
+
+input {
+    height: 50px;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 15px auto;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: white;
+    padding: 0 15px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+/* UX: Feedback ao clicar no campo */
+input:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #38bdf8; /* Azul claro neon */
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+#botaoEntrar {
+    background-color: #38bdf8;
+    color: #0f172a;
+    height: 50px;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 12px;
+    margin: 15px auto 0 auto;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* UX: Efeito de Hover (Interatividade) */
+#botaoEntrar:hover {
+    background-color: #7dd3fc;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
+}
+
+#botaoEntrar:active {
+    transform: translateY(0);
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        div {
+            border: 1px solid black;
+            padding: 16px;
+        }
+    </style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manipulação DOM com estilização</title>
+</head>
+
+<body>
+    <h1 id="meuh1">Objeto</h1>
+    <button onclick="tamanhoTexto1()">Modificar tamanho de texto</button>
+    <h2 id="meuh2">Propriedade id</h2>
+    <button onclick="tamanhoTexto2()">Modificar tamanho de texto</button>
+    <p id="meup1">Clique para mudar o tamanho da fonte de texto</p>
+    <button onclick="tamanhoTexto3()">Modificar tamanho de texto</button>
+
+    <p>--------------------------------------------------------------------</p>
+    <h1>Elemento div</h1>
+    <h2>Obter elemento por TagName através de seu id</h2>
+    <p>Clique aqui para modificar o segundo elemento da div "minhadiv"...</p>
+    <button onclick="modificarDiv()">Modificar elemento da div "minhadiv"</button>
+    <div id="minhadiv">
+        <p>Paragrafo 1</p>
+        <p>Paragrafo 2</p>
+        <p>Paragrafo 3</p>
+    </div>
+
+    <h1 onmouseover="h11()" id="h11">Trocar cor</h1>
+
+
+    <script>
+
+        // Cria uma função chamada tamanhoTexto3
+        function tamanhoTexto3() {
+
+            // const cria uma variável fixa (não pode mudar depois)
+            // txtsize vai guardar um elemento do HTML
+            const txtsize = document.getElementById("meup1");
+            // document representa a página HTML inteira
+            // getElementById procura um elemento pelo id "meup1"
+
+            // style permite alterar o CSS do elemento
+            // fontSize define o tamanho da letra
+            // "200px" é o valor do tamanho da fonte
+            txtsize.style.fontSize = "200px";
+        }
+
+
+        function tamanhoTexto1() {
+            const txtsize = document.getElementById("meuh1");
+            txtsize.style.fontSize = "60px";
+        }
+
+        function tamanhoTexto2() {
+            const txtsize = document.getElementById("meuh2");
+            txtsize.style.fontSize = "100px";
+        }
+
+        function modificarDiv() {
+            const elementodiv = document.getElementById("minhadiv");
+            elementodiv.getElementsByTagName("p")[1].style.fontSize = "40px";
+            elementodiv.getElementsByTagName("p")[2].style.color = "red";
+        }
+
+        function h11() {
+            const txtsize = document.getElementById("h11");
+            color = txtsize.style.color = "blue";
+
+        }
+    </script>
+</body>
+
+</html>

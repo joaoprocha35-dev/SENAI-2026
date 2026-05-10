@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manipulação do DOM pelo usuário</title>
+</head>
+
+<body>
+    <h1>Alterando o texto com DOM solicitando ao usuário</h1>
+    <p>Texto Original</p>
+    <p>Texto Original 2</p>
+    <button onclick="alterarTexto()">Alterando o texto</button>
+    <script>
+        function alterarTexto() {
+            let valor = prompt("Escolha qual o número do parágrafo deseja alterar...")
+
+            // tag name, puxa todas as tags "p", [0]: Vetor, utilizado para pegar um "p" específico
+            document.getElementsByTagName("p")[valor - 1].innerText = prompt("Digite o texto a ser alterado...")
+            // valor - 1 é usado porque o usuário conta os parágrafos começando do 1,
+            // mas o JavaScript começa a contar as posições do vetor a partir do 0
+        }
+    </script>
+</body>
+
+</html>

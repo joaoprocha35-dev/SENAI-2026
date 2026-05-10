@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex1 Event Listener</title>
+
+    <style>
+
+        #caixa{
+            width: 200px;
+            height: 200px;
+            background-color: rgba(71, 71, 180, 0.745);
+            color: aliceblue;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            margin-bottom: 10px;
+
+        }
+
+        .dark{
+            background-color: #222;
+            color: white;
+
+        }
+        
+      
+    </style>
+</head>
+<body>
+    <h2>Utilizando o addEventlistener</h2>
+
+    <div id="caixa"> caixa inicial</div>
+
+    <button id="botao">
+        <b>clique em min</b>
+    </button>
+
+    <button id="botaoClique">
+        contar cliques
+    </button>
+
+    <button id="botaoTema">
+        Modo Claro/Modo escuro
+    </button>
+    <form id="forEmail">
+        <input type="email" id="email" placeholder="Digite o seu e-mail">
+        <button type="submit">Validar</button>
+        <p id="mensagem"></p>
+    </form>
+
+    <script>
+        // // Selecionsar os elementos g
+         var caixa = document.getElementById("caixa")
+         var botao = document.getElementById("botao")
+         var area = document.getElementById("caixa")
+         var botaoClique = document.getElementById("botaoClique")
+         var contador = 0
+         var posX= 0 
+         var posY= 0
+         var botaotema= document.getElementById("botaoTema")
+         var email = document.getElementById("email")
+         var forEmail = document.getElementById("forEmail")
+         var mensagem = document.getElementById("mensagem")
+         // Adicione o event lister ao botão
+        botao.addEventListener("click", mudarCaixa)
+         botao.addEventListener("click", mudarCaixa)
+        caixa.addEventListener("mouseenter", entrou )
+        // caixa.addEventListener("mouseout", sair)
+         //Criar a função que será executada qunado o botão clicar
+
+
+        // function sair(){
+        //     caixa.innerHTML="sair"
+        //     caixa.style.fontSize="15px"
+        //     caixa.style.color="black"
+        // }
+    
+         function mudarCaixa(){
+             caixa.innerText="Você clicou"
+             caixa.style.background="green"
+         }
+
+        function entrou(){
+           caixa.innerHTML="entrou"
+           caixa.style.fontSize="10px"
+           caixa.style.background="blue"
+         }
+
+
+        // função para mostrar a tecla pressionada
+        document.addEventListener("keydown", mostrarTecla)
+        function mostrarTecla(event){
+            area.innerHTML="Tecla: "+event.key
+        }
+
+        // contador de cliques
+        botaoClique.addEventListener("click", contarCliques)
+
+        function contarCliques(){
+            contador++
+            area.innerHTML="cliques: "+contador
+        }
+        //mover a caixa com a seta
+        document.addEventListener("keydown", moverCaixa)
+        function moverCaixa(event){
+            var tecla = event.key
+            if (tecla === 'ArrowRight') posX +=10
+            if (tecla === 'ArrowLeft') posX -=10
+            if (tecla === 'ArrowDown') posY +=10
+            if (tecla === 'ArrowUp') posY -=10
+       
+            // limite simples, margem superior, inferior, direita e esquerda
+            if (posX<0) posX=0
+            if (posY<0) posY=0
+            if(posX>1800) posX=1800
+            if (posY> 1800) posY=1800
+            area.style.transform = "translate("+posX +"px, "+posY +"px)"
+        }
+            // Modo Escuro 
+            botaotema.addEventListener("click", alternarTema)
+            function alternarTema(){
+                document.body.classList.toggle("dark")
+            }
+                  // validação  E-mail
+            forEmail.addEventListener("submit", validarEmail)
+            function validarEmail(event){
+                event.preventDefault()
+                var valor = email.value
+                var temArroba =  false
+
+                for(var c of valor){
+                    if(c==="@"){
+                        temArroba=true
+                        break
+                    }
+                }
+                if(temArroba){
+                    mensagem.innerHTML= "E-mail válido"
+                    Messagem.style.color= "green"
+
+                }else{
+                    mensagem.innerHTML="E-mail válido"
+                    mensagem.style.color="red"
+
+                }
+            }   
+    
+            
+
+          
+        
+
+
+
+    </script>
+
+</body>
+</html>
