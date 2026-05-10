@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GAMEHUB_ — New Player Entry</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-900: #050505;
+      --card-bg: #0f0f0f;
+      --neon-purple: #bc13fe;
+      --neon-blue: #00f3ff;
+      --neon-green: #39ff14;
+      --text-main: #e0e0e0;
+      --text-dim: #94a3b8;
+      --line: rgba(188, 19, 254, 0.2);
+    }
+
+    body {
+      background-color: var(--bg-900);
+      color: var(--text-main);
+      font-family: 'Rajdhani', sans-serif;
+      background-image: radial-gradient(circle at 50% 100%, rgba(188, 19, 254, 0.08) 0%, transparent 50%),
+        linear-gradient(180deg, #050505 0%, #0a0a0a 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .orbitron {
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    /* Animações */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .animate-fade {
+      animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .d-1 {
+      animation-delay: 0.1s;
+    }
+
+    .d-2 {
+      animation-delay: 0.2s;
+    }
+
+    .d-3 {
+      animation-delay: 0.3s;
+    }
+
+    .typing-animation {
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 3px solid var(--neon-blue);
+      animation: typing 1.5s steps(30, end), blink-caret .75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from {
+        width: 0
+      }
+
+      to {
+        width: 100%
+      }
+    }
+
+    @keyframes blink-caret {
+
+      from,
+      to {
+        border-color: transparent
+      }
+
+      50% {
+        border-color: var(--neon-blue);
+      }
+    }
+
+    /* Navbar Estilizada */
+    .app-nav {
+      background: rgba(0, 0, 0, 0.9);
+      border-bottom: 2px solid var(--neon-purple);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .navbar-brand {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--neon-blue) !important;
+      text-shadow: 0 0 10px var(--neon-blue);
+    }
+
+    .nav-link {
+      color: var(--text-dim) !important;
+      text-transform: uppercase;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--neon-green) !important;
+      text-shadow: 0 0 8px var(--neon-green);
+    }
+
+    /* Cabeçalho da Página */
+    .page-head {
+      padding: 40px 0 20px;
+    }
+
+    .crumb a {
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: 0.3s;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.75rem;
+    }
+
+    .crumb a:hover {
+      color: var(--neon-blue);
+      text-shadow: 0 0 5px var(--neon-blue);
+    }
+
+    .crumb span {
+      color: var(--neon-purple);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.75rem;
+    }
+
+    .sys-tag {
+      display: inline-block;
+      border: 1px solid var(--neon-purple);
+      color: var(--neon-purple);
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      background: rgba(188, 19, 254, 0.1);
+      margin-bottom: 15px;
+    }
+
+    /* Formulário */
+    .form-card {
+      background: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 35px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+      position: relative;
+    }
+
+    .form-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+    }
+
+    .form-label {
+      color: var(--neon-blue);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .input-wrap i.prefix {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--neon-purple);
+      font-size: 1.1rem;
+      pointer-events: none;
+    }
+
+    .form-control {
+      background: rgba(255, 255, 255, 0.02) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      color: var(--text-main) !important;
+      border-radius: 8px !important;
+      padding: 0.8rem 1rem 0.8rem 2.8rem !important;
+      font-size: 1.05rem !important;
+      font-family: 'Rajdhani', sans-serif !important;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+
+    .form-control::placeholder {
+      color: #475569;
+      font-family: monospace;
+    }
+
+    .form-control:focus {
+      border-color: var(--neon-blue) !important;
+      background: rgba(0, 243, 255, 0.05) !important;
+      box-shadow: 0 0 15px rgba(0, 243, 255, 0.2) !important;
+      outline: none !important;
+    }
+
+    /* Botões */
+    .btn-submit {
+      background: transparent;
+      color: var(--neon-blue);
+      border: 1px solid var(--neon-blue);
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      padding: 0.8rem 1.5rem;
+      border-radius: 6px;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn-submit:hover {
+      background: var(--neon-blue);
+      color: #000;
+      box-shadow: 0 0 20px var(--neon-blue);
+      transform: translateY(-2px);
+    }
+
+    .btn-cancel {
+      background: transparent;
+      color: var(--text-dim);
+      border: 1px solid #333;
+      font-family: 'Orbitron', sans-serif;
+      padding: 0.8rem 1.5rem;
+      border-radius: 6px;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+    }
+
+    .btn-cancel:hover {
+      border-color: var(--text-main);
+      color: var(--text-main);
+    }
+
+    .form-divider {
+      height: 1px;
+      border: none;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      margin: 2rem 0;
+    }
+
+    /* Painel Lateral (Tips) */
+    .sys-panel {
+      background: rgba(188, 19, 254, 0.03);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 30px;
+      height: 100%;
+    }
+
+    .sys-panel h5 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--neon-purple);
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+      border-bottom: 1px solid rgba(188, 19, 254, 0.2);
+      padding-bottom: 10px;
+    }
+
+    .sys-panel ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sys-panel li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 12px 0;
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+    }
+
+    .sys-panel li:last-child {
+      border-bottom: none;
+    }
+
+    .sys-panel li i {
+      color: var(--neon-green);
+      font-size: 1rem;
+      margin-top: 2px;
+    }
+
+    /* Footer Terminal */
+    footer {
+      margin-top: 60px;
+      padding: 20px 0;
+      border-top: 1px solid rgba(0, 243, 255, 0.2);
+      color: #475569;
+      font-family: monospace;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg app-nav">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="/">GAMEHUB_</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <i class="bi bi-list text-white"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto gap-3">
+          <li class="nav-item"><a class="nav-link" href="/">Início</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Games</a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="/cadastrar-livro">Cadastrar Game</a></li>
+              <li><a class="dropdown-item" href="/listar-livro">Biblioteca</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown">Players</a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="/cadastrar-leitor">Novo Player</a></li>
+              <li><a class="dropdown-item" href="/listar-leitor">Squad de Players</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="/listar-emprestimo">Logs de Aluguel</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="page-head container animate-fade d-1">
+    <div class="crumb mb-3">
+      <a href="/">ROOT</a> <i class="bi bi-chevron-right text-muted mx-1"></i>
+      <a href="/listar-leitor">PLAYERS</a> <i class="bi bi-chevron-right text-muted mx-1"></i>
+      <span>NEW_ENTRY</span>
+    </div>
+    <span class="sys-tag"><i class="bi bi-cpu"></i> Sys_Admin</span>
+    <h1 class="orbitron typing-animation d-block mb-2">REGISTER_NEW_PLAYER</h1>
+    <p class="text-dim">Injete os dados do novo usuário no mainframe. A precisão dos dados garante acesso aos recursos
+      da biblioteca local.</p>
+  </section>
+
+  <section class="container mt-3 mb-5">
+    <div class="row g-4">
+
+      <div class="col-lg-8 animate-fade d-2">
+        <form class="form-card" action="/cadastrar-leitor" method="post">
+          <div class="d-flex align-items-center justify-content-between mb-4">
+            <h4 class="orbitron text-white m-0">PLAYER_DATA</h4>
+            <i class="bi bi-shield-lock text-success fs-5"></i>
+          </div>
+
+          <div class="row g-4">
+            <div class="col-md-6">
+              <label for="cpf" class="form-label">SERIAL_CPF</label>
+              <div class="input-wrap">
+                <i class="bi bi-upc-scan prefix"></i>
+                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="XXX.XXX.XXX-XX" required>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="nome" class="form-label">NICKNAME_FULL</label>
+              <div class="input-wrap">
+                <i class="bi bi-person-bounding-box prefix"></i>
+                <input type="text" class="form-control" id="nome" name="nome" placeholder="John Doe" required>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="endereco" class="form-label">BASE_LOCATION</label>
+              <div class="input-wrap">
+                <i class="bi bi-geo-alt prefix"></i>
+                <input type="text" class="form-control" id="endereco" name="endereco" placeholder="Sector 7, Slums"
+                  required>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="telefone" class="form-label">COMMS_LINK (TEL)</label>
+              <div class="input-wrap">
+                <i class="bi bi-headset prefix"></i>
+                <input type="text" class="form-control" id="telefone" name="telefone" placeholder="(XX) XXXXX-XXXX"
+                  required>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="email" class="form-label">COMMS_LINK (EMAIL)</label>
+              <div class="input-wrap">
+                <i class="bi bi-envelope-at prefix"></i>
+                <input type="email" class="form-control" id="email" name="email" placeholder="player@server.com"
+                  required>
+              </div>
+            </div>
+          </div>
+
+          <hr class="form-divider">
+
+          <div class="d-flex justify-content-end gap-3">
+            <a href="/listar-leitor" class="btn btn-cancel"><i class="bi bi-x-circle me-1"></i> Abort</a>
+            <button type="submit" class="btn btn-submit">
+              <i class="bi bi-database-add me-1"></i> INITIALIZE_PLAYER
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="col-lg-4 animate-fade d-3">
+        <div class="sys-panel">
+          <h5><i class="bi bi-terminal me-2"></i>Terminal_Instructions</h5>
+          <ul>
+            <li>
+              <i class="bi bi-check-square"></i>
+              <span>O <b>SERIAL_CPF</b> é a chave primária. Insira no formato correto para evitar conflitos na base de
+                dados.</span>
+            </li>
+            <li>
+              <i class="bi bi-check-square"></i>
+              <span>Valide as rotas de comunicação (E-mail e Comms Link). Elas disparam alertas sobre pendências de
+                aluguel.</span>
+            </li>
+            <li>
+              <i class="bi bi-check-square"></i>
+              <span>Ao inicializar o cadastro, o ID do player estará instantaneamente apto para resgate de Games.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="container d-flex justify-content-between align-items-center">
+      <span>> GAMEHUB_ DATABASE v2.0 // OFFLINE_MODE: FALSE</span>
+      <span>ENCRYPTED_CONNECTION</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

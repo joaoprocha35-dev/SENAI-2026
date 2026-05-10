@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Papyro — Cadastrar Leitor</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-900: #0b0805;
+      --line: rgba(212, 175, 55, .12);
+      --line-strong: rgba(212, 175, 55, .28);
+      --gold-50: #fff7e0;
+      --gold-300: #e7c77a;
+      --gold-400: #d4af37;
+      --gold-500: #b8892b;
+      --amber: #f5b042;
+      --text: #ece4d3;
+      --text-dim: #b8ad97;
+      --text-mute: #7a7466;
+      --danger: #e8685b;
+      --success: #7bc48a;
+    }
+
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    html,
+    body {
+      background: var(--bg-900);
+    }
+
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      font-family: 'Manrope', system-ui, -apple-system, sans-serif;
+      letter-spacing: -.005em;
+      background:
+        radial-gradient(1200px 600px at 85% -10%, rgba(212, 175, 55, .18), transparent 60%),
+        radial-gradient(900px 500px at -10% 20%, rgba(184, 137, 43, .10), transparent 60%),
+        radial-gradient(700px 500px at 50% 110%, rgba(245, 176, 66, .08), transparent 60%),
+        linear-gradient(180deg, #0b0805 0%, #0a0604 100%);
+      background-attachment: fixed;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.85  0 0 0 0 0.70  0 0 0 0 0.35  0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+      opacity: .35;
+      mix-blend-mode: overlay;
+      z-index: 0;
+    }
+
+    .serif {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+
+    .text-gold {
+      color: var(--gold-300);
+    }
+
+    .text-dim {
+      color: var(--text-dim);
+    }
+
+    .text-mute {
+      color: var(--text-mute);
+    }
+
+    /* NAVBAR (mesma da home) */
+    .app-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(11, 8, 5, .65);
+      backdrop-filter: saturate(140%) blur(16px);
+      -webkit-backdrop-filter: saturate(140%) blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .app-nav .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      letter-spacing: .02em;
+      font-size: 1.6rem;
+      color: var(--gold-50);
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+
+    .app-nav .navbar-brand .mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: linear-gradient(145deg, #d4af37, #7a5a12);
+      display: inline-grid;
+      place-items: center;
+      color: #1a120b;
+      font-weight: 900;
+      box-shadow: 0 6px 20px -6px rgba(212, 175, 55, .6), inset 0 1px 0 rgba(255, 255, 255, .25);
+    }
+
+    .app-nav .nav-link {
+      color: var(--text-dim) !important;
+      font-weight: 500;
+      font-size: .95rem;
+      padding: .55rem .9rem !important;
+      border-radius: 10px;
+      transition: color .2s ease, background .2s ease;
+    }
+
+    .app-nav .nav-link:hover {
+      color: var(--gold-50) !important;
+      background: rgba(212, 175, 55, .06);
+    }
+
+    .app-nav .nav-link.active {
+      color: var(--gold-300) !important;
+      background: rgba(212, 175, 55, .08);
+    }
+
+    .app-nav .dropdown-menu {
+      background: #140e08;
+      border: 1px solid var(--line-strong);
+      border-radius: 14px;
+      padding: .4rem;
+      min-width: 220px;
+      box-shadow: 0 20px 60px -20px rgba(0, 0, 0, .6);
+    }
+
+    .app-nav .dropdown-item {
+      color: var(--text-dim);
+      border-radius: 10px;
+      padding: .6rem .8rem;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-size: .92rem;
+    }
+
+    .app-nav .dropdown-item:hover {
+      background: rgba(212, 175, 55, .08);
+      color: var(--gold-50);
+    }
+
+    .app-nav .dropdown-item i {
+      color: var(--gold-400);
+    }
+
+    .navbar-toggler {
+      border-color: var(--line-strong);
+    }
+
+    .navbar-toggler-icon {
+      filter: invert(.85) sepia(.6) hue-rotate(1deg);
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .55rem 1rem;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
+      color: #1a120b !important;
+      font-weight: 700;
+      font-size: .9rem;
+      border: 1px solid rgba(255, 255, 255, .08);
+      box-shadow: 0 8px 24px -10px rgba(212, 175, 55, .6);
+      transition: transform .15s ease, box-shadow .2s ease;
+      text-decoration: none;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px -10px rgba(212, 175, 55, .8);
+    }
+
+    /* PAGE HEADER */
+    .page-head {
+      position: relative;
+      padding: 56px 0 24px;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .22em;
+      color: var(--gold-300);
+      padding: .4rem .7rem;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      background: rgba(212, 175, 55, .05);
+      backdrop-filter: blur(8px);
+    }
+
+    .eyebrow .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--amber);
+      box-shadow: 0 0 10px var(--amber);
+    }
+
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(2rem, 4.5vw, 3.4rem);
+      line-height: 1.05;
+      letter-spacing: -.02em;
+      color: var(--gold-50);
+      text-shadow: 0 2px 30px rgba(212, 175, 55, .15);
+      margin-top: 1rem;
+    }
+
+    .page-title em {
+      font-style: italic;
+      background: linear-gradient(180deg, #f7e3a3 0%, #d4af37 60%, #8a6416 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .page-sub {
+      color: var(--text-dim);
+      max-width: 640px;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* BREADCRUMB */
+    .crumb {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .85rem;
+      color: var(--text-mute);
+    }
+
+    .crumb a {
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color .2s ease;
+    }
+
+    .crumb a:hover {
+      color: var(--gold-300);
+    }
+
+    .crumb i {
+      color: var(--gold-400);
+      font-size: .7rem;
+    }
+
+    /* FORM CARD */
+    .form-card {
+      position: relative;
+      z-index: 1;
+      border-radius: 22px;
+      padding: 36px;
+      background: linear-gradient(160deg, rgba(26, 18, 11, .85), rgba(18, 13, 8, .6));
+      border: 1px solid var(--line-strong);
+      box-shadow: 0 30px 80px -30px rgba(0, 0, 0, .7), inset 0 1px 0 rgba(255, 255, 255, .04);
+      backdrop-filter: blur(10px);
+      overflow: hidden;
+    }
+
+    .form-card::before {
+      content: "";
+      position: absolute;
+      inset: -1px -1px auto -1px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold-400), transparent);
+      opacity: .5;
+    }
+
+    .form-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--gold-50);
+      font-weight: 700;
+      margin: 0 0 4px;
+      letter-spacing: -.01em;
+    }
+
+    .form-card .hint {
+      color: var(--text-dim);
+      font-size: .9rem;
+    }
+
+    .form-label {
+      color: var(--gold-300);
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      margin-bottom: .5rem;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+
+    .form-label i {
+      color: var(--gold-400);
+      font-size: .9rem;
+    }
+
+    .form-control,
+    .input-wrap input {
+      background: rgba(11, 8, 5, .55) !important;
+      border: 1px solid var(--line) !important;
+      color: var(--text) !important;
+      border-radius: 12px !important;
+      padding: .85rem 1rem !important;
+      font-size: .95rem !important;
+      font-family: 'Manrope', sans-serif !important;
+      transition: border-color .2s ease, background .2s ease, box-shadow .2s ease;
+    }
+
+    .form-control::placeholder {
+      color: var(--text-mute);
+    }
+
+    .form-control:hover {
+      border-color: var(--line-strong) !important;
+    }
+
+    .form-control:focus {
+      background: rgba(11, 8, 5, .8) !important;
+      border-color: var(--gold-400) !important;
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, .12) !important;
+      color: var(--gold-50) !important;
+      outline: none !important;
+    }
+
+    .form-control:-webkit-autofill {
+      -webkit-text-fill-color: var(--gold-50) !important;
+      -webkit-box-shadow: 0 0 0 30px #140e08 inset !important;
+      caret-color: var(--gold-50);
+    }
+
+    /* Input with icon */
+    .input-wrap {
+      position: relative;
+    }
+
+    .input-wrap i.prefix {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gold-400);
+      font-size: 1rem;
+      pointer-events: none;
+    }
+
+    .input-wrap input {
+      padding-left: 2.6rem !important;
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, #e9c76f, #b8892b);
+      color: #1a120b;
+      border: 1px solid rgba(255, 255, 255, .1);
+      box-shadow: 0 14px 30px -12px rgba(212, 175, 55, .65), inset 0 1px 0 rgba(255, 255, 255, .25);
+      padding: .85rem 1.5rem;
+      border-radius: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      transition: transform .15s ease, box-shadow .2s ease;
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-1px);
+      color: #1a120b;
+      box-shadow: 0 18px 40px -12px rgba(212, 175, 55, .85), inset 0 1px 0 rgba(255, 255, 255, .35);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--gold-50);
+      border: 1px solid var(--line-strong);
+      padding: .85rem 1.25rem;
+      border-radius: 12px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      transition: border-color .2s ease, color .2s ease;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--gold-300);
+      color: var(--gold-300);
+    }
+
+    .form-divider {
+      height: 1px;
+      border: none;
+      background: linear-gradient(90deg, transparent, var(--line-strong), transparent);
+      margin: 1.5rem 0;
+    }
+
+    /* Side tips panel */
+    .tips {
+      border-radius: 20px;
+      padding: 26px;
+      background: linear-gradient(160deg, rgba(26, 18, 11, .7), rgba(18, 13, 8, .5));
+      border: 1px solid var(--line);
+      height: 100%;
+    }
+
+    .tips h5 {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold-50);
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin: 0 0 6px;
+    }
+
+    .tips p.sub {
+      color: var(--text-dim);
+      font-size: .88rem;
+      margin: 0 0 18px;
+    }
+
+    .tips ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .tips li {
+      display: flex;
+      gap: .7rem;
+      align-items: flex-start;
+      padding: 10px 0;
+      font-size: .88rem;
+      color: var(--text-dim);
+      border-top: 1px dashed var(--line);
+    }
+
+    .tips li:first-child {
+      border-top: none;
+    }
+
+    .tips li i {
+      color: var(--gold-300);
+      font-size: .85rem;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    footer {
+      margin-top: 70px;
+      padding: 40px 0 30px;
+      border-top: 1px solid var(--line);
+      color: var(--text-mute);
+      font-size: .85rem;
+    }
+
+    footer .sep {
+      margin: 0 10px;
+      opacity: .5;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .fade-up {
+      animation: fadeUp .7s ease both;
+    }
+
+    .d-1 {
+      animation-delay: .05s
+    }
+
+    .d-2 {
+      animation-delay: .12s
+    }
+
+    .d-3 {
+      animation-delay: .2s
+    }
+
+    .d-4 {
+      animation-delay: .28s
+    }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0b0805;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #2a2014;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3b2d1c;
+    }
+
+    @media (max-width: 767.98px) {
+      .form-card {
+        padding: 24px;
+      }
+
+      .page-head {
+        padding-top: 32px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg app-nav">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <span class="mark">P</span> Papyro
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav mx-auto gap-1">
+          <li class="nav-item"><a class="nav-link" href="/"><i class="bi bi-house-door me-1"></i> Início</a></li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><i class="bi bi-book me-1"></i>
+              Livros</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/cadastrar-livro"><i class="bi bi-plus-circle"></i> Cadastrar livro</a>
+              </li>
+              <li><a class="dropdown-item" href="/listar-livro"><i class="bi bi-collection"></i> Listar livros</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" role="button" data-bs-toggle="dropdown"><i
+                class="bi bi-people me-1"></i> Leitores</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/cadastrar-leitor"><i class="bi bi-person-plus"></i> Cadastrar
+                  leitor</a></li>
+              <li><a class="dropdown-item" href="/listar-leitor"><i class="bi bi-people-fill"></i> Listar leitores</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><i
+                class="bi bi-arrow-left-right me-1"></i> Empréstimos</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/realizar-emprestimo"><i class="bi bi-bookmark-plus"></i> Realizar
+                  empréstimo</a></li>
+              <li><a class="dropdown-item" href="/listar-emprestimo"><i class="bi bi-journal-text"></i> Listar
+                  empréstimos</a></li>
+            </ul>
+          </li>
+        </ul>
+        <a href="/realizar-emprestimo" class="nav-cta"><i class="bi bi-lightning-charge-fill"></i> Novo empréstimo</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <section class="page-head">
+    <div class="container">
+      <div class="crumb fade-up d-1 mb-3">
+        <a href="/"><i class="bi bi-house-door"></i> Início</a>
+        <i class="bi bi-chevron-right"></i>
+        <a href="/listar-leitor">Leitores</a>
+        <i class="bi bi-chevron-right"></i>
+        <span class="text-gold">Cadastrar</span>
+      </div>
+      <span class="eyebrow fade-up d-1"><span class="dot"></span> Novo leitor</span>
+      <h1 class="page-title fade-up d-2">Cadastre um novo <em>leitor</em>.</h1>
+      <p class="page-sub fade-up d-3">
+        Preencha os dados abaixo para adicionar uma nova pessoa ao acervo.
+        As informações ajudam a identificar o leitor em empréstimos e comunicações.
+      </p>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section class="container mt-4 mb-5">
+    <div class="row g-4">
+      <div class="col-lg-8 fade-up d-2">
+        <form class="form-card" action="/cadastrar-leitor" method="post">
+          <div class="d-flex align-items-start justify-content-between flex-wrap gap-2 mb-4">
+            <div>
+              <h2>Dados do leitor</h2>
+              <div class="hint">Todos os campos são obrigatórios.</div>
+            </div>
+            <span class="eyebrow"><i class="bi bi-shield-check"></i> Seguro</span>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="cpf" class="form-label"><i class="bi bi-person-vcard"></i> CPF</label>
+              <div class="input-wrap">
+                <i class="bi bi-credit-card-2-front prefix"></i>
+                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="000.000.000-00" required>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="nome" class="form-label"><i class="bi bi-person"></i> Nome completo</label>
+              <div class="input-wrap">
+                <i class="bi bi-person-circle prefix"></i>
+                <input type="text" class="form-control" id="nome" name="nome" placeholder="Ex.: Maria Clara Souza"
+                  required>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="endereco" class="form-label"><i class="bi bi-geo-alt"></i> Endereço</label>
+              <div class="input-wrap">
+                <i class="bi bi-house prefix"></i>
+                <input type="text" class="form-control" id="endereco" name="endereco"
+                  placeholder="Rua, número, bairro, cidade" required>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="telefone" class="form-label"><i class="bi bi-telephone"></i> Telefone</label>
+              <div class="input-wrap">
+                <i class="bi bi-phone prefix"></i>
+                <input type="text" class="form-control" id="telefone" name="telefone" placeholder="(00) 00000-0000"
+                  required>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="email" class="form-label"><i class="bi bi-envelope"></i> E-mail</label>
+              <div class="input-wrap">
+                <i class="bi bi-at prefix"></i>
+                <input type="email" class="form-control" id="email" name="email" placeholder="leitor@exemplo.com"
+                  required>
+              </div>
+            </div>
+          </div>
+
+          <hr class="form-divider">
+
+          <div class="d-flex flex-wrap gap-2 justify-content-end align-items-center">
+            <a href="/listar-leitor" class="btn btn-ghost"><i class="bi bi-arrow-left"></i> Cancelar</a>
+            <button type="submit" class="btn btn-gold">
+              <i class="bi bi-check2-circle"></i> Cadastrar leitor
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- TIPS SIDE -->
+      <div class="col-lg-4 fade-up d-3">
+        <div class="tips">
+          <h5><i class="bi bi-lightbulb text-gold me-1"></i> Dicas rápidas</h5>
+          <p class="sub">Pequenos detalhes que garantem um cadastro impecável.</p>
+          <ul>
+            <li><i class="bi bi-check2-circle"></i> Use o CPF no formato <b
+                style="color:var(--gold-50)">000.000.000-00</b> para facilitar buscas.</li>
+            <li><i class="bi bi-check2-circle"></i> Confirme o e-mail — ele será usado em avisos de devolução.</li>
+            <li><i class="bi bi-check2-circle"></i> O endereço completo ajuda em entregas e cartas de cobrança.</li>
+            <li><i class="bi bi-check2-circle"></i> Leitores cadastrados entram automaticamente no histórico.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container d-flex justify-content-between align-items-center flex-wrap gap-2">
+      <div class="d-flex align-items-center gap-2">
+        <span
+          style="width:26px;height:26px;border-radius:8px;background:linear-gradient(145deg,#d4af37,#7a5a12);display:inline-grid;place-items:center;color:#1a120b;font-weight:900;font-size:.8rem;">P</span>
+        <span class="serif text-gold" style="font-size:1rem;">Papyro</span>
+        <span class="sep">·</span>
+        <span>© 2025 · Feito com tipografia e café.</span>
+      </div>
+      <div class="d-flex gap-3">
+        <a href="#" class="text-dim text-decoration-none">Privacidade</a>
+        <a href="#" class="text-dim text-decoration-none">Termos</a>
+        <a href="#" class="text-dim text-decoration-none">Suporte</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

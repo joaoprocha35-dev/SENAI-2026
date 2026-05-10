@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GameCenter — Squad de Players</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-900: #050505;
+      --card-bg: #0f0f0f;
+      --neon-purple: #bc13fe;
+      --neon-blue: #00f3ff;
+      --neon-green: #39ff14;
+      --text-main: #e0e0e0;
+      --text-dim: #94a3b8;
+      --line: rgba(188, 19, 254, 0.2);
+    }
+
+    body {
+      background-color: var(--bg-900);
+      color: var(--text-main);
+      font-family: 'Rajdhani', sans-serif;
+      background-image: radial-gradient(circle at 50% 100%, rgba(188, 19, 254, 0.08) 0%, transparent 50%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .orbitron {
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    /* Animações Globais */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulseGlow {
+      0% {
+        box-shadow: 0 0 5px var(--neon-purple);
+      }
+
+      50% {
+        box-shadow: 0 0 20px var(--neon-purple);
+      }
+
+      100% {
+        box-shadow: 0 0 5px var(--neon-purple);
+      }
+    }
+
+    .animate-fade {
+      animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Animação de escrita no título */
+    .typing-animation {
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 3px solid var(--neon-blue);
+      animation: typing 2s steps(30, end), blink-caret .75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from {
+        width: 0
+      }
+
+      to {
+        width: 100%
+      }
+    }
+
+    @keyframes blink-caret {
+
+      from,
+      to {
+        border-color: transparent
+      }
+
+      50% {
+        border-color: var(--neon-blue);
+      }
+    }
+
+    /* Navbar Estilizada */
+    .app-nav {
+      background: rgba(0, 0, 0, 0.9);
+      border-bottom: 2px solid var(--neon-purple);
+      backdrop-filter: blur(10px);
+    }
+
+    .navbar-brand {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--neon-blue) !important;
+      text-shadow: 0 0 10px var(--neon-blue);
+    }
+
+    .nav-link {
+      color: var(--text-dim) !important;
+      text-transform: uppercase;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--neon-green) !important;
+      text-shadow: 0 0 8px var(--neon-green);
+    }
+
+    /* Painel da Tabela corrigido para Dark Mode Nativo */
+    .panel-players {
+      background: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      padding: 0;
+      /* Removido padding interno para a tabela colar nas bordas */
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+      margin-top: 30px;
+      overflow: hidden;
+      /* Mantém as bordas arredondadas intactas */
+    }
+
+    /* Forçando a tabela a ser transparente e não branca */
+    .table-gamer {
+      margin-bottom: 0;
+      --bs-table-bg: transparent;
+      color: var(--text-main);
+      vertical-align: middle;
+    }
+
+    .table-gamer thead th {
+      background: rgba(188, 19, 254, 0.08) !important;
+      color: var(--neon-blue);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      border-bottom: 2px solid var(--neon-purple);
+      padding: 20px;
+    }
+
+    .table-gamer tbody td {
+      padding: 18px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      background: transparent !important;
+      color: var(--text-main);
+    }
+
+    /* Efeito de Hover nas Linhas com transição suave */
+    .table-gamer tbody tr {
+      transition: all 0.3s ease;
+      border-left: 3px solid transparent;
+    }
+
+    .table-gamer tbody tr:hover {
+      background: rgba(0, 243, 255, 0.05) !important;
+      border-left: 3px solid var(--neon-blue);
+      transform: scale(1.005);
+    }
+
+    /* Avatar do Player animado */
+    .player-avatar {
+      width: 45px;
+      height: 45px;
+      background: linear-gradient(135deg, var(--neon-purple), #4a00e0);
+      color: #fff;
+      border-radius: 12px;
+      display: inline-grid;
+      place-items: center;
+      font-weight: 900;
+      margin-right: 15px;
+      font-family: 'Orbitron';
+      font-size: 1.2rem;
+      animation: pulseGlow 3s infinite;
+    }
+
+    /* Botões de Ação aprimorados */
+    .btn-action {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.75rem;
+      border-radius: 4px;
+      padding: 8px 15px;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .btn-edit {
+      border: 1px solid var(--neon-green);
+      color: var(--neon-green);
+      background: transparent;
+    }
+
+    .btn-edit:hover {
+      background: var(--neon-green);
+      color: #000;
+      box-shadow: 0 0 20px var(--neon-green);
+      transform: translateY(-2px);
+    }
+
+    .btn-delete {
+      border: 1px solid #ff2e63;
+      color: #ff2e63;
+      background: transparent;
+    }
+
+    .btn-delete:hover {
+      background: #ff2e63;
+      color: #fff;
+      box-shadow: 0 0 20px #ff2e63;
+      transform: translateY(-2px);
+    }
+
+    .cpf-tag {
+      background: rgba(0, 243, 255, 0.1);
+      color: var(--neon-blue);
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-family: monospace;
+      border: 1px solid rgba(0, 243, 255, 0.2);
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg app-nav">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="/">GAMEHUB_</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <i class="bi bi-list text-white"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto gap-3">
+          <li class="nav-item"><a class="nav-link" href="/">Início</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Games</a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="/cadastrar-livro">Cadastrar Game</a></li>
+              <li><a class="dropdown-item" href="/listar-livro">Biblioteca</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown">Players</a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="/cadastrar-leitor">Novo Player</a></li>
+              <li><a class="dropdown-item" href="/listar-leitor">Squad de Players</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="/listar-emprestimo">Logs de Aluguel</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mt-5">
+    <div class="text-center mb-5 animate-fade">
+      <h2 class="orbitron typing-animation">PLAYER_RANKING_DATABASE</h2>
+      <p class="text-dim mt-2">Gerenciamento de perfis e histórico de usuários ativos no sistema.</p>
+    </div>
+
+    <div class="panel-players animate-fade" style="animation-delay: 0.2s;">
+      <div class="table-responsive">
+        <table class="table table-dark table-borderless table-gamer">
+          <thead>
+            <tr>
+              <th scope="col">ID_NICKNAME</th>
+              <th scope="col">SERIAL_CPF</th>
+              <th scope="col">COMMS_EMAIL</th>
+              <th scope="col" class="text-center">TERMINAL_ACTIONS</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for leitor in leitores %}
+            <tr>
+              <td>
+                <div class="d-flex align-items-center">
+                  <div class="player-avatar">{{ leitor[1][:1].upper() }}</div>
+                  <span class="fw-bold fs-5">{{ leitor[1] }}</span>
+                </div>
+              </td>
+              <td><span class="cpf-tag">{{ leitor[0] }}</span></td>
+              <td class="text-dim">{{ leitor[2] }}</td>
+              <td>
+                <div class="d-flex justify-content-center gap-3">
+                  <a href="/editar-leitor/{{ leitor[0] }}" class="btn btn-action btn-edit">
+                    <i class="bi bi-pencil-square me-1"></i> Edit
+                  </a>
+                  <a href="/excluir-leitor/{{ leitor[0] }}" class="btn btn-action btn-delete">
+                    <i class="bi bi-person-x me-1"></i> Kick
+                  </a>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="mt-4 d-flex justify-content-between align-items-center animate-fade" style="animation-delay: 0.4s;">
+      <p class="text-dim small mb-0"><i class="bi bi-exclamation-triangle text-warning me-2"></i>Atenção: A exclusão de
+        um player do banco de dados é permanente.</p>
+      <a href="/cadastrar-leitor" class="btn btn-outline-info orbitron px-4 py-2"
+        style="border-radius: 0; border-width: 2px;">+ NEW_PLAYER_ENTRY</a>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,909 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Papyro — Cadastrar Livro</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-900: #0b0805;
+      --line: rgba(212, 175, 55, .12);
+      --line-strong: rgba(212, 175, 55, .28);
+      --gold-50: #fff7e0;
+      --gold-300: #e7c77a;
+      --gold-400: #d4af37;
+      --gold-500: #b8892b;
+      --amber: #f5b042;
+      --text: #ece4d3;
+      --text-dim: #b8ad97;
+      --text-mute: #7a7466;
+      --danger: #e8685b;
+      --success: #7bc48a;
+    }
+
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    html,
+    body {
+      background: var(--bg-900);
+    }
+
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      font-family: 'Manrope', system-ui, -apple-system, sans-serif;
+      letter-spacing: -.005em;
+      background:
+        radial-gradient(1200px 600px at 85% -10%, rgba(212, 175, 55, .18), transparent 60%),
+        radial-gradient(900px 500px at -10% 20%, rgba(184, 137, 43, .10), transparent 60%),
+        radial-gradient(700px 500px at 50% 110%, rgba(245, 176, 66, .08), transparent 60%),
+        linear-gradient(180deg, #0b0805 0%, #0a0604 100%);
+      background-attachment: fixed;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.85  0 0 0 0 0.70  0 0 0 0 0.35  0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+      opacity: .35;
+      mix-blend-mode: overlay;
+      z-index: 0;
+    }
+
+    .serif {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+
+    .text-gold {
+      color: var(--gold-300);
+    }
+
+    .text-dim {
+      color: var(--text-dim);
+    }
+
+    .text-mute {
+      color: var(--text-mute);
+    }
+
+    /* NAVBAR */
+    .app-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(11, 8, 5, .65);
+      backdrop-filter: saturate(140%) blur(16px);
+      -webkit-backdrop-filter: saturate(140%) blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .app-nav .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      letter-spacing: .02em;
+      font-size: 1.6rem;
+      color: var(--gold-50);
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+
+    .app-nav .navbar-brand .mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: linear-gradient(145deg, #d4af37, #7a5a12);
+      display: inline-grid;
+      place-items: center;
+      color: #1a120b;
+      font-weight: 900;
+      box-shadow: 0 6px 20px -6px rgba(212, 175, 55, .6), inset 0 1px 0 rgba(255, 255, 255, .25);
+    }
+
+    .app-nav .nav-link {
+      color: var(--text-dim) !important;
+      font-weight: 500;
+      font-size: .95rem;
+      padding: .55rem .9rem !important;
+      border-radius: 10px;
+      transition: color .2s ease, background .2s ease;
+    }
+
+    .app-nav .nav-link:hover {
+      color: var(--gold-50) !important;
+      background: rgba(212, 175, 55, .06);
+    }
+
+    .app-nav .nav-link.active {
+      color: var(--gold-300) !important;
+      background: rgba(212, 175, 55, .08);
+    }
+
+    .app-nav .dropdown-menu {
+      background: #140e08;
+      border: 1px solid var(--line-strong);
+      border-radius: 14px;
+      padding: .4rem;
+      min-width: 220px;
+      box-shadow: 0 20px 60px -20px rgba(0, 0, 0, .6);
+    }
+
+    .app-nav .dropdown-item {
+      color: var(--text-dim);
+      border-radius: 10px;
+      padding: .6rem .8rem;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-size: .92rem;
+    }
+
+    .app-nav .dropdown-item:hover {
+      background: rgba(212, 175, 55, .08);
+      color: var(--gold-50);
+    }
+
+    .app-nav .dropdown-item i {
+      color: var(--gold-400);
+    }
+
+    .navbar-toggler {
+      border-color: var(--line-strong);
+    }
+
+    .navbar-toggler-icon {
+      filter: invert(.85) sepia(.6) hue-rotate(1deg);
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .55rem 1rem;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
+      color: #1a120b !important;
+      font-weight: 700;
+      font-size: .9rem;
+      border: 1px solid rgba(255, 255, 255, .08);
+      box-shadow: 0 8px 24px -10px rgba(212, 175, 55, .6);
+      transition: transform .15s ease, box-shadow .2s ease;
+      text-decoration: none;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px -10px rgba(212, 175, 55, .8);
+    }
+
+    /* PAGE HEADER */
+    .page-head {
+      position: relative;
+      padding: 56px 0 24px;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .22em;
+      color: var(--gold-300);
+      padding: .4rem .7rem;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      background: rgba(212, 175, 55, .05);
+      backdrop-filter: blur(8px);
+    }
+
+    .eyebrow .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--amber);
+      box-shadow: 0 0 10px var(--amber);
+    }
+
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(2rem, 4.5vw, 3.4rem);
+      line-height: 1.05;
+      letter-spacing: -.02em;
+      color: var(--gold-50);
+      text-shadow: 0 2px 30px rgba(212, 175, 55, .15);
+      margin-top: 1rem;
+    }
+
+    .page-title em {
+      font-style: italic;
+      background: linear-gradient(180deg, #f7e3a3 0%, #d4af37 60%, #8a6416 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .page-sub {
+      color: var(--text-dim);
+      max-width: 640px;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* BREADCRUMB */
+    .crumb {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .85rem;
+      color: var(--text-mute);
+    }
+
+    .crumb a {
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color .2s ease;
+    }
+
+    .crumb a:hover {
+      color: var(--gold-300);
+    }
+
+    .crumb i {
+      color: var(--gold-400);
+      font-size: .7rem;
+    }
+
+    /* FORM CARD */
+    .form-card {
+      position: relative;
+      z-index: 1;
+      border-radius: 22px;
+      padding: 36px;
+      background: linear-gradient(160deg, rgba(26, 18, 11, .85), rgba(18, 13, 8, .6));
+      border: 1px solid var(--line-strong);
+      box-shadow: 0 30px 80px -30px rgba(0, 0, 0, .7), inset 0 1px 0 rgba(255, 255, 255, .04);
+      backdrop-filter: blur(10px);
+      overflow: hidden;
+    }
+
+    .form-card::before {
+      content: "";
+      position: absolute;
+      inset: -1px -1px auto -1px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold-400), transparent);
+      opacity: .5;
+    }
+
+    .form-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--gold-50);
+      font-weight: 700;
+      margin: 0 0 4px;
+      letter-spacing: -.01em;
+    }
+
+    .form-card .hint {
+      color: var(--text-dim);
+      font-size: .9rem;
+    }
+
+    .section-label {
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .2em;
+      color: var(--gold-400);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      margin: 8px 0 14px;
+    }
+
+    .section-label::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--line-strong), transparent);
+    }
+
+    .form-label {
+      color: var(--gold-300);
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      margin-bottom: .5rem;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+
+    .form-label i {
+      color: var(--gold-400);
+      font-size: .9rem;
+    }
+
+    .form-control,
+    .input-wrap input {
+      background: rgba(11, 8, 5, .55) !important;
+      border: 1px solid var(--line) !important;
+      color: var(--text) !important;
+      border-radius: 12px !important;
+      padding: .85rem 1rem !important;
+      font-size: .95rem !important;
+      font-family: 'Manrope', sans-serif !important;
+      transition: border-color .2s ease, background .2s ease, box-shadow .2s ease;
+    }
+
+    .form-control::placeholder {
+      color: var(--text-mute);
+    }
+
+    .form-control:hover {
+      border-color: var(--line-strong) !important;
+    }
+
+    .form-control:focus {
+      background: rgba(11, 8, 5, .8) !important;
+      border-color: var(--gold-400) !important;
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, .12) !important;
+      color: var(--gold-50) !important;
+      outline: none !important;
+    }
+
+    .form-control:-webkit-autofill {
+      -webkit-text-fill-color: var(--gold-50) !important;
+      -webkit-box-shadow: 0 0 0 30px #140e08 inset !important;
+      caret-color: var(--gold-50);
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .input-wrap i.prefix {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gold-400);
+      font-size: 1rem;
+      pointer-events: none;
+    }
+
+    .input-wrap input {
+      padding-left: 2.6rem !important;
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, #e9c76f, #b8892b);
+      color: #1a120b;
+      border: 1px solid rgba(255, 255, 255, .1);
+      box-shadow: 0 14px 30px -12px rgba(212, 175, 55, .65), inset 0 1px 0 rgba(255, 255, 255, .25);
+      padding: .85rem 1.5rem;
+      border-radius: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      transition: transform .15s ease, box-shadow .2s ease;
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-1px);
+      color: #1a120b;
+      box-shadow: 0 18px 40px -12px rgba(212, 175, 55, .85), inset 0 1px 0 rgba(255, 255, 255, .35);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--gold-50);
+      border: 1px solid var(--line-strong);
+      padding: .85rem 1.25rem;
+      border-radius: 12px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      transition: border-color .2s ease, color .2s ease;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--gold-300);
+      color: var(--gold-300);
+    }
+
+    .form-divider {
+      height: 1px;
+      border: none;
+      background: linear-gradient(90deg, transparent, var(--line-strong), transparent);
+      margin: 1.5rem 0;
+    }
+
+    /* BOOK PREVIEW CARD */
+    .book-preview {
+      border-radius: 20px;
+      padding: 26px;
+      background: linear-gradient(160deg, rgba(26, 18, 11, .7), rgba(18, 13, 8, .5));
+      border: 1px solid var(--line);
+      height: 100%;
+      position: sticky;
+      top: 88px;
+    }
+
+    .book-preview h5 {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold-50);
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin: 0 0 6px;
+    }
+
+    .book-preview .sub {
+      color: var(--text-dim);
+      font-size: .88rem;
+      margin: 0 0 18px;
+    }
+
+    .book-cover {
+      position: relative;
+      aspect-ratio: 3/4;
+      border-radius: 12px;
+      background:
+        linear-gradient(135deg, #2a1c0e 0%, #150d06 60%, #0a0604 100%);
+      border: 1px solid var(--line-strong);
+      box-shadow:
+        inset 4px 0 20px rgba(0, 0, 0, .5),
+        0 20px 40px -20px rgba(0, 0, 0, .8);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 22px 20px;
+    }
+
+    .book-cover::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 18px;
+      background: linear-gradient(90deg, rgba(0, 0, 0, .5), transparent);
+    }
+
+    .book-cover::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(closest-side at 30% 30%, rgba(212, 175, 55, .12), transparent 60%),
+        repeating-linear-gradient(45deg, rgba(212, 175, 55, .03) 0 2px, transparent 2px 6px);
+      pointer-events: none;
+    }
+
+    .bc-top,
+    .bc-bottom {
+      position: relative;
+      z-index: 1;
+    }
+
+    .bc-brand {
+      font-size: .65rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--gold-400);
+      font-weight: 700;
+    }
+
+    .bc-title {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold-50);
+      font-weight: 700;
+      font-size: 1.4rem;
+      line-height: 1.15;
+      margin-top: 18px;
+      word-break: break-word;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .bc-author {
+      font-style: italic;
+      color: var(--gold-300);
+      font-size: .85rem;
+      margin-top: 10px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .bc-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      border-top: 1px solid var(--line-strong);
+      padding-top: 12px;
+      font-size: .72rem;
+      color: var(--text-mute);
+      letter-spacing: .1em;
+    }
+
+    .bc-meta .gen {
+      color: var(--gold-300);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .preview-info {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .preview-info .pi {
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: rgba(212, 175, 55, .04);
+      border: 1px solid var(--line);
+    }
+
+    .preview-info .pi .l {
+      font-size: .65rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--text-mute);
+    }
+
+    .preview-info .pi .v {
+      color: var(--gold-50);
+      font-weight: 600;
+      font-size: .9rem;
+      margin-top: 2px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    footer {
+      margin-top: 70px;
+      padding: 40px 0 30px;
+      border-top: 1px solid var(--line);
+      color: var(--text-mute);
+      font-size: .85rem;
+    }
+
+    footer .sep {
+      margin: 0 10px;
+      opacity: .5;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .fade-up {
+      animation: fadeUp .7s ease both;
+    }
+
+    .d-1 {
+      animation-delay: .05s
+    }
+
+    .d-2 {
+      animation-delay: .12s
+    }
+
+    .d-3 {
+      animation-delay: .2s
+    }
+
+    .d-4 {
+      animation-delay: .28s
+    }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0b0805;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #2a2014;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3b2d1c;
+    }
+
+    @media (max-width: 991.98px) {
+      .book-preview {
+        position: static;
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      .form-card {
+        padding: 24px;
+      }
+
+      .page-head {
+        padding-top: 32px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg app-nav">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <span class="mark">P</span> Papyro
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav mx-auto gap-1">
+          <li class="nav-item"><a class="nav-link" href="/"><i class="bi bi-house-door me-1"></i> Início</a></li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" role="button" data-bs-toggle="dropdown"><i
+                class="bi bi-book me-1"></i> Livros</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/cadastrar-livro"><i class="bi bi-plus-circle"></i> Cadastrar livro</a>
+              </li>
+              <li><a class="dropdown-item" href="/listar-livro"><i class="bi bi-collection"></i> Listar livros</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><i
+                class="bi bi-people me-1"></i> Leitores</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/cadastrar-leitor"><i class="bi bi-person-plus"></i> Cadastrar
+                  leitor</a></li>
+              <li><a class="dropdown-item" href="/listar-leitor"><i class="bi bi-people-fill"></i> Listar leitores</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><i
+                class="bi bi-arrow-left-right me-1"></i> Empréstimos</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/realizar-emprestimo"><i class="bi bi-bookmark-plus"></i> Realizar
+                  empréstimo</a></li>
+              <li><a class="dropdown-item" href="/listar-emprestimo"><i class="bi bi-journal-text"></i> Listar
+                  empréstimos</a></li>
+            </ul>
+          </li>
+        </ul>
+        <a href="/realizar-emprestimo" class="nav-cta"><i class="bi bi-lightning-charge-fill"></i> Novo empréstimo</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <section class="page-head">
+    <div class="container">
+      <div class="crumb fade-up d-1 mb-3">
+        <a href="/"><i class="bi bi-house-door"></i> Início</a>
+        <i class="bi bi-chevron-right"></i>
+        <a href="/listar-livro">Livros</a>
+        <i class="bi bi-chevron-right"></i>
+        <span class="text-gold">Cadastrar</span>
+      </div>
+      <span class="eyebrow fade-up d-1"><span class="dot"></span> Novo livro</span>
+      <h1 class="page-title fade-up d-2">Adicione uma nova obra ao <em>acervo</em>.</h1>
+      <p class="page-sub fade-up d-3">
+        Preencha as informações bibliográficas abaixo. Os dados alimentam buscas, relatórios e o histórico de
+        empréstimos.
+      </p>
+    </div>
+  </section>
+
+  <!-- FORM + PREVIEW -->
+  <section class="container mt-4 mb-5">
+    <div class="row g-4">
+      <div class="col-lg-8 fade-up d-2">
+        <form class="form-card" action="/cadastrar-livro" method="post">
+          <div class="d-flex align-items-start justify-content-between flex-wrap gap-2 mb-3">
+            <div>
+              <h2>Dados do livro</h2>
+              <div class="hint">Todos os campos são obrigatórios.</div>
+            </div>
+            <span class="eyebrow"><i class="bi bi-shield-check"></i> Seguro</span>
+          </div>
+
+          <div class="section-label"><i class="bi bi-hash"></i> Identificação</div>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="isbn" class="form-label"><i class="bi bi-upc"></i> ISBN</label>
+              <div class="input-wrap">
+                <i class="bi bi-upc-scan prefix"></i>
+                <input type="text" class="form-control" id="isbn" name="isbn" placeholder="978-85-000-0000-0" required>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="edicao" class="form-label"><i class="bi bi-123"></i> Edição</label>
+              <div class="input-wrap">
+                <i class="bi bi-stack prefix"></i>
+                <input type="text" class="form-control" id="edicao" name="edicao" placeholder="Ex.: 1ª" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-label mt-4"><i class="bi bi-book"></i> Conteúdo</div>
+          <div class="row g-3">
+            <div class="col-12">
+              <label for="titulo" class="form-label"><i class="bi bi-type"></i> Título</label>
+              <div class="input-wrap">
+                <i class="bi bi-bookmark-star prefix"></i>
+                <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Ex.: O Nome do Vento"
+                  required>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="autor" class="form-label"><i class="bi bi-person"></i> Autor</label>
+              <div class="input-wrap">
+                <i class="bi bi-feather prefix"></i>
+                <input type="text" class="form-control" id="autor" name="autor" placeholder="Ex.: Patrick Rothfuss"
+                  required>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="genero" class="form-label"><i class="bi bi-tag"></i> Gênero</label>
+              <div class="input-wrap">
+                <i class="bi bi-tags prefix"></i>
+                <input type="text" class="form-control" id="genero" name="genero" placeholder="Ex.: Fantasia" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-label mt-4"><i class="bi bi-printer"></i> Publicação</div>
+          <div class="row g-3">
+            <div class="col-md-7">
+              <label for="editora" class="form-label"><i class="bi bi-building"></i> Editora</label>
+              <div class="input-wrap">
+                <i class="bi bi-buildings prefix"></i>
+                <input type="text" class="form-control" id="editora" name="editora" placeholder="Ex.: Arqueiro"
+                  required>
+              </div>
+            </div>
+
+            <div class="col-md-5">
+              <label for="ano" class="form-label"><i class="bi bi-calendar"></i> Ano de publicação</label>
+              <div class="input-wrap">
+                <i class="bi bi-calendar-event prefix"></i>
+                <input type="text" class="form-control" id="ano" name="ano" placeholder="Ex.: 2007" required>
+              </div>
+            </div>
+          </div>
+
+          <hr class="form-divider">
+
+          <div class="d-flex flex-wrap gap-2 justify-content-end align-items-center">
+            <a href="/listar-livro" class="btn btn-ghost"><i class="bi bi-arrow-left"></i> Cancelar</a>
+            <button type="submit" class="btn btn-gold">
+              <i class="bi bi-check2-circle"></i> Cadastrar livro
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- BOOK PREVIEW -->
+      <div class="col-lg-4 fade-up d-3">
+        <div class="book-preview">
+          <h5><i class="bi bi-eye text-gold me-1"></i> Pré-visualização</h5>
+          <p class="sub">Atualiza conforme você digita.</p>
+
+          <div class="book-cover">
+            <div class="bc-top">
+              <div class="bc-brand">Papyro · Coleção</div>
+              <div class="bc-title" id="pv-titulo">Título do livro</div>
+              <div class="bc-author">por <span id="pv-autor">Autor desconhecido</span></div>
+            </div>
+            <div class="bc-bottom">
+              <div class="bc-meta">
+                <span class="gen" id="pv-genero">Gênero</span>
+                <span><span id="pv-ano">Ano</span> · <span id="pv-edicao">ed.</span></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="preview-info">
+            <div class="pi">
+              <div class="l">ISBN</div>
+              <div class="v" id="pv-isbn">—</div>
+            </div>
+            <div class="pi">
+              <div class="l">Editora</div>
+              <div class="v" id="pv-editora">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container d-flex justify-content-between align-items-center flex-wrap gap-2">
+      <div class="d-flex align-items-center gap-2">
+        <span
+          style="width:26px;height:26px;border-radius:8px;background:linear-gradient(145deg,#d4af37,#7a5a12);display:inline-grid;place-items:center;color:#1a120b;font-weight:900;font-size:.8rem;">P</span>
+        <span class="serif text-gold" style="font-size:1rem;">Papyro</span>
+        <span class="sep">·</span>
+        <span>© 2025 · Feito com tipografia e café.</span>
+      </div>
+      <div class="d-flex gap-3">
+        <a href="#" class="text-dim text-decoration-none">Privacidade</a>
+        <a href="#" class="text-dim text-decoration-none">Termos</a>
+        <a href="#" class="text-dim text-decoration-none">Suporte</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Live preview (só front, não afeta o form) -->
+  <script>
+    const bind = (inputId, targetId, fallback) => {
+      const inp = document.getElementById(inputId);
+      const tgt = document.getElementById(targetId);
+      if (!inp || !tgt) return;
+      inp.addEventListener('input', () => {
+        tgt.textContent = inp.value.trim() || fallback;
+      });
+    };
+    bind('titulo', 'pv-titulo', 'Título do livro');
+    bind('autor', 'pv-autor', 'Autor desconhecido');
+    bind('genero', 'pv-genero', 'Gênero');
+    bind('ano', 'pv-ano', 'Ano');
+    bind('edicao', 'pv-edicao', 'ed.');
+    bind('isbn', 'pv-isbn', '—');
+    bind('editora', 'pv-editora', '—');
+  </script>
+</body>
+
+</html>
