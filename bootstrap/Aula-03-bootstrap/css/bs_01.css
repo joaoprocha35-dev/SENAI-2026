@@ -1,0 +1,18 @@
+/* Isso dá espaço entre todos os itens da sua navbar de uma vez só */
+    .navbar-nav .nav-item {
+        margin-left: 15px; 
+    }
+
+    .container02{
+        min-height: 300px;
+        width: 100%;
+    }
+
+    .conteudo03{
+        min-height: 20px;
+        width: 100%;
+    }
+    .container04{
+        min-height: 300px;
+        width: 100%;
+    }

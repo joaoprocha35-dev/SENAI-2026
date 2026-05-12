@@ -1,0 +1,4 @@
+/* Isso dá espaço entre todos os itens da sua navbar de uma vez só */
+    .navbar-nav .nav-item {
+        margin-left: 15px; 
+    }
