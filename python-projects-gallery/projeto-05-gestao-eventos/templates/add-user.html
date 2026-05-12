@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Conta | SGE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --bg: #0f172a;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: var(--bg); 
+            height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            margin: 0; 
+        }
+
+        .box { 
+            background: white; 
+            padding: 48px 40px; 
+            border-radius: 16px; 
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); 
+            width: 100%;
+            max-width: 400px; 
+        }
+
+        .box h2 { 
+            text-align: center; 
+            color: #1e293b; 
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .box p {
+            text-align: center;
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 32px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 6px;
+        }
+
+        input { 
+            width: 100%; 
+            padding: 12px; 
+            margin-bottom: 20px; 
+            border: 1px solid #e2e8f0; 
+            border-radius: 8px; 
+            box-sizing: border-box; 
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .btn-register { 
+            width: 100%; 
+            padding: 14px; 
+            background: var(--primary); 
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .btn-register:hover { 
+            background: var(--primary-hover); 
+        }
+
+        .footer-link {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+        
+        .footer-link a { 
+            color: var(--primary); 
+            text-decoration: none; 
+            font-weight: 600; 
+        }
+
+        .badge {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #4338ca;
+            padding: 4px 12px;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+
+        .text-center { text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="text-center">
+            <span class="badge">Novo Usuário</span>
+        </div>
+        <h2>Criar sua conta</h2>
+        <p>Junte-se à plataforma de gestão de eventos</p>
+        
+        <form action="/register" method="POST">
+            <label for="username">Escolha um usuário</label>
+            <input type="text" id="username" name="username" placeholder="ex: joao_silva" required>
+            
+            <label for="password">Defina uma senha</label>
+            <input type="password" id="password" name="password" placeholder="••••••••" required>
+            
+            <button type="submit" class="btn-register">Finalizar Cadastro</button>
+        </form>
+
+        <div class="footer-link">
+            Já possui uma conta? <a href="/login">Fazer Login</a>
+        </div>
+    </div>
+</body>
+</html>
