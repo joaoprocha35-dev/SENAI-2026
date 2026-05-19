@@ -1,0 +1,20 @@
+//1. Primeiro importar as funções
+@import "scss/functions";
+
+//2.Criar as próprias cores
+$primary: rgb(246, 255, 0);
+$danger: black;
+
+
+//3. Importar as bibliotexas e as variáveis restantes
+@import "scss/variables";
+// @import "scss/maps";
+// @import "scss/mixins";
+
+
+//Opcional - Criar uma cor totalmente nova que nao existe no mapa do bs:
+$custom-colors:(
+    "amarelo": #a109c7
+);
+$theme-colors:map-merge($theme-colors,$custom-colors); //Adicionando cores dentro do mapa do bs.
+@import "scss/bootstrap";
