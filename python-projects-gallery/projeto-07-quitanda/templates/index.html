@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Quitanda do Tomate Cru — Painel de Controle</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+
+        <div class="container py-5">
+
+            <header class="text-center mb-5">
+                <h1 class="brand-title display-5">Quitanda do <span>Tomate Cru</span></h1>
+                <p class="text-muted">Painel administrativo para gestão de estoque e produtos</p>
+            </header>
+
+            <main>
+                <div class="custom-card p-4 p-md-5 mb-5">
+                    <h2 class="h5 mb-4">Informações do Produto</h2>
+                    
+                    <form id="form-produto" onsubmit="event.preventDefault();">
+                        <input type="hidden" id="id">
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-12 col-md-6">
+                                <label for="nome" class="form-label-custom">Nome do Produto</label>
+                                <input id="nome" class="form-control-custom w-100" placeholder="Ex: Tomate Italiano" required>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label for="marca" class="form-label-custom">Marca ou Fornecedor</label>
+                                <input id="marca" class="form-control-custom w-100" placeholder="Ex: Fazenda Verde" required>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <label for="preco" class="form-label-custom">Preço (R$)</label>
+                                <input id="preco" type="number" step="0.01" class="form-control-custom w-100" placeholder="0.00" required>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <label for="quantidade" class="form-label-custom">Quantidade</label>
+                                <input id="quantidade" type="number" class="form-control-custom w-100" placeholder="0" required>
+                            </div>
+                            <div class="col-12 col-md-6 d-flex align-items-end">
+                                <button id="btn-salvar" class="btn btn-primary-custom w-100 d-flex align-items-center justify-content-center gap-2" onclick="gravar_dados()">
+                                    Salvar Produto
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <div id="mensagem" class="alert mt-3 d-none border-0 shadow-sm" role="alert"></div>
+                </div>
+
+                <section>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h2 class="h5 mb-0">Produtos em Estoque</h2>
+                    </div>
+
+                    <div class="table-responsive table-custom">
+                        <table class="table table-borderless mb-0">
+                            <thead>
+                                <tr>
+                                    <th style="width: 80px;">ID</th>
+                                    <th>Nome</th>
+                                    <th>Marca</th>
+                                    <th class="text-end" style="width: 120px;">Preço</th>
+                                    <th class="text-end" style="width: 120px;">Qtd.</th>
+                                    <th class="text-center" style="width: 160px;">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabela-produtos">
+                                </tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <script src="/static/requests.js"></script>
+
+    </body>
+</html>
