@@ -1,0 +1,24 @@
+Tecnologias no backend
+Express: framework para requisições e respostas http
+
+Cors: Ele permite que requisições e respostas de fontes de diferentes portas se comuniquem.
+
+mysql2: Permite a integração ou comunicação entre Backend e Banco de Dados
+
+Dotenv: Permite a configuração do seu servidor e Banco de Dados sem que a sua configuração 
+fique a mostra. 
+
+ABAIXANDO OS RECURSOS DO BACKEND NO TERMINAL;
+Express.
+cors.
+dotenv.
+mysql2
+-iniciando um novo projeto em backend node.js
+
+terminal : npm init -y 
+significado -y: tudo que for ser executado irá permitir automaticamente.
+
+Segundo código: npm install express.
+
+terceiro: npm install --save mysql2.
+quarto: npm install dotenv --save
