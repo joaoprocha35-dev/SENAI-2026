@@ -1,0 +1,89 @@
+/* ==========================================
+   ESTILOS GERAIS DA APLICAÇÃO
+   ========================================== */
+
+/* Define uma fonte moderna e um fundo suave para a página */
+body {
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333333;
+  margin: 0;
+  padding: 0;
+}
+
+/* ==========================================
+   BARRA DE NAVEGAÇÃO (NAVBAR)
+   ========================================== */
+
+/* Garante um visual limpo e bordas suaves no menu */
+nav {
+  background-color: #ffffff !important;
+  border: 1px solid #e9ecef;
+  transition: all 0.3s ease;
+}
+
+/* Estilo do Título/Logo no Menu */
+nav span {
+  letter-spacing: -0.5px;
+  color: #0d6efd;
+}
+
+/* Estilo customizado para os links (Botões) */
+nav a.btn {
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 6px 16px;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Efeito ao passar o mouse por cima dos botões */
+nav a.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(13, 110, 253, 0.2);
+}
+
+/* ==========================================
+   CARDS DE CONTEÚDO (PÁGINAS)
+   ========================================== */
+
+.card {
+  background-color: #ffffff;
+  border: 1px solid #e3e8ee;
+  border-radius: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Pequeno efeito de elevação no card ao passar o mouse */
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Estilização dos títulos dentro dos cards */
+.card h2 {
+  color: #212529;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #eef2f6;
+  padding-bottom: 0.5rem;
+}
+
+/* Estilização dos parágrafos */
+.card p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* ==========================================
+   RESPONSIVIDADE (TELAS MENORES / CELULAR)
+   ========================================== */
+
+@media (max-width: 768px) {
+  nav {
+    text-align: center;
+  }
+
+  nav a.btn {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+}
