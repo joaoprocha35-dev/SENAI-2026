@@ -1,0 +1,64 @@
+//Importação do Bootstrap + overrides
+//---------------------------------
+// 1. Importar Variáveis e Mixins
+@import "./variables";
+@import "./mixins";
+
+// 2. Sobrescrever Variáveis Padrão do Bootstrap
+$primary: $neon-green;
+$body-bg: $dark-bg;
+$body-color: $dark-text;
+
+// 3. Importar a Suíte Completa do Bootstrap SCSS
+@import "bootstrap/scss/bootstrap";
+
+// 4. Variáveis CSS Globais Dinâmicas (Dark vs Light Mode)
+:root {
+  --bg-color: #{$dark-bg};
+  --surface-color: #{$dark-surface};
+  --text-color: #{$dark-text};
+  --text-muted: #{$dark-text-muted};
+  --accent-color: #{$neon-green};
+  --accent-glow: #{$neon-green-glow};
+  --nav-link-color: #ffffff;
+}
+
+[data-theme="light"] {
+  --bg-color: #{$light-bg};
+  --surface-color: #{$light-surface};
+  --text-color: #{$light-text};
+  --text-muted: #{$light-text-muted};
+  --accent-color: #{$light-blue};
+  --accent-glow: rgba(2, 132, 199, 0.25);
+  --nav-link-color: #0f172a;
+}
+
+// 5. Configurações Globais da Aplicação
+html, body {
+  scroll-behavior: smooth;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.4s ease, color 0.4s ease;
+  overflow-x: hidden;
+  font-family: $font-family-base;
+}
+
+/* Links de Navegação Minimalistas (Sem Caixa/Container) */
+.clean-nav-link {
+  color: var(--nav-link-color);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.05rem;
+  transition: color 0.3s ease, transform 0.2s ease;
+  padding: 0.5rem 1rem;
+
+  &:hover {
+    color: var(--accent-color);
+    transform: translateY(-2px);
+  }
+
+  &.active {
+    color: var(--accent-color);
+    @include text-neon-glow($neon-green);
+  }
+}

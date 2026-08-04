@@ -1,0 +1,38 @@
+//Seus mixins customizados
+//-------------------------------------
+
+@import "./variables";
+
+// Mixin para Centralizar com Flexbox
+@mixin flex-center($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+// Mixin para Brilho Neon em Texto
+@mixin text-neon-glow($color: $neon-green) {
+  text-shadow: 0 0 10px rgba($color, 0.6), 0 0 20px rgba($color, 0.3);
+}
+
+// Mixin para Brilho Neon em Borda / Box
+@mixin box-neon-glow($color: $neon-green) {
+  box-shadow: 0 0 15px rgba($color, 0.3), 0 0 30px rgba($color, 0.15);
+}
+
+// Mixin para Cards Estilo Vidro (Glassmorphism)
+@mixin glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+}
+
+// Responsividade Direcionada
+@mixin mobile-only {
+  @media (max-width: 767.98px) {
+    @content;
+  }
+}
