@@ -16,7 +16,6 @@ app.post('/cadastro', async (req, res) => {
   const { nome, email, senha, setor } = req.body;
 
   try {
-    // O '?' evita ataques de SQL Injection (segurança!)
     const query = 'INSERT INTO operadores (nome, email, senha, setor) VALUES (?, ?, ?, ?)';
     const [resultado] = await db.query(query, [nome, email, senha, setor]);
 
@@ -24,7 +23,6 @@ app.post('/cadastro', async (req, res) => {
     res.status(201).json({ message: "Operador cadastrado com sucesso!", id: resultado.insertId });
   } catch (erro) {
     console.error(erro);
-    // Se o erro for 1062, significa que o UNIQUE do email barrou a operação
     if (erro.code === 'ER_DUP_ENTRY') {
       res.status(400).json({ error: "Este e-mail corporativo já está em uso." });
     } else {
@@ -41,7 +39,6 @@ app.post('/login', async (req, res) => {
     const query = 'SELECT * FROM operadores WHERE email = ? AND senha = ?';
     const [linhas] = await db.query(query, [email, senha]);
 
-    // O 'linhas' é uma matriz. Se length > 0, achamos o usuário.
     if (linhas.length > 0) {
       console.log(`[AUTH] Login autorizado: ${email}`);
       res.status(200).json({ message: "Login autorizado!", usuario: linhas[0] });
@@ -52,6 +49,27 @@ app.post('/login', async (req, res) => {
   } catch (erro) {
     console.error(erro);
     res.status(500).json({ error: "Erro interno no servidor." });
+  }
+});
+
+// Rota para abrir chamados de suporte
+app.post('/suporte', async (req, res) => {
+  const { operador, setor, descricao } = req.body;
+
+  if (!operador || !setor || !descricao) {
+    return res.status(400).json({ error: 'Preencha todos os campos.' });
+  }
+
+  try {
+    const query = 'INSERT INTO chamados (operador, setor, descricao) VALUES (?, ?, ?)';
+    await db.query(query, [operador, setor, descricao]);
+
+    console.log('Chamada enviada com sucesso!');
+    
+    return res.status(201).json({ message: 'Chamado aberto com sucesso!' });
+  } catch (erro) {
+    console.error(erro);
+    return res.status(500).json({ error: 'Erro ao salvar o chamado no banco.' });
   }
 });
 
