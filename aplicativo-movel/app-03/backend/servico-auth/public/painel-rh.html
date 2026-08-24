@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel do RH - Notificações</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #ffffff;
+    }
+    h2 {
+      color: #003366;
+      margin-top: 30px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 8px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #333;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-family: inherit;
+    }
+    .btn-notificar {
+      background-color: #003366;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: bold;
+      width: 100%;
+    }
+    .btn-notificar:hover {
+      background-color: #002244;
+    }
+    .card-form {
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 6px;
+      border: 1px solid #e0e0e0;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>2. Enviar Notificação Direcionada ao App</h2>
+  <p>Envie um comunicado interno para ser exibido como notificação nativa no celular do operador:</p>
+
+  <div class="card-form">
+    <div class="form-group">
+      <label for="notif-email">E-mail do Operador:</label>
+      <input type="email" id="notif-email" placeholder="ex: carlos@industria.com">
+    </div>
+
+    <div class="form-group">
+      <label for="notif-titulo">Título da Notificação:</label>
+      <input type="text" id="notif-titulo" placeholder="ex: Convocação CIPA">
+    </div>
+
+    <div class="form-group">
+      <label for="notif-mensagem">Mensagem:</label>
+      <textarea id="notif-mensagem" rows="3" placeholder="Digite o texto da notificação..."></textarea>
+    </div>
+
+    <button class="btn-notificar" onclick="enviarNotificacao()">ENVIAR NOTIFICAÇÃO AO CELULAR</button>
+  </div>
+
+  <script>
+    async function enviarNotificacao() {
+      const email = document.getElementById('notif-email').value;
+      const titulo = document.getElementById('notif-titulo').value;
+      const mensagem = document.getElementById('notif-mensagem').value;
+
+      if (!email || !titulo || !mensagem) {
+        alert('Por favor, preencha o e-mail, título e mensagem da notificação.');
+        return;
+      }
+
+      try {
+        const res = await fetch('/rh/enviar-notificacao', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, titulo, mensagem })
+        });
+
+        const dados = await res.json();
+
+        if (res.ok) {
+          alert(dados.message);
+          document.getElementById('notif-email').value = '';
+          document.getElementById('notif-titulo').value = '';
+          document.getElementById('notif-mensagem').value = '';
+        } else {
+          alert(dados.error || 'Erro ao enviar notificação.');
+        }
+      } catch (erro) {
+        console.error(erro);
+        alert('Erro de conexão ao enviar a notificação.');
+      }
+    }
+  </script>
+</body>
+</html>

@@ -77,17 +77,7 @@ const Inicio = () => {
   return (
     <div className={styles.pageWrapper}>
       
-      {/* Navegação Topo Direita (Apenas Links e Botão de Tema) */}
-      <nav className={styles.topNav}>
-        <div className={styles.navLinks}>
-          <a href="/inicio">Início</a>
-          <a href="/sobre">Sobre mim</a>
-          <a href="/projetos">Projetos</a>
-        </div>
-        <button className={styles.themeToggle} aria-label="Alternar Tema">
-          <FaSun />
-        </button>
-      </nav>
+   
 
       {/* Hero Section */}
       <section className={styles.heroLayout}>
@@ -111,9 +101,8 @@ const Inicio = () => {
           <img src={profileImg} alt="João Pedro Rocha" className={styles.heroProfilePic} />
           
           <div className={styles.floatingRole}>
-            <span className={styles.roleSmall}>Web Design</span>
-            <span className={styles.roleMedium}>Desenvolvedor</span>
-            <span className={styles.roleLarge}>Web</span>
+            <span className={styles.roleSmall}>Desenvolvedor</span>
+            <span className={styles.roleMedium}>Web Desing</span>
           </div>
         </div>
       </section>

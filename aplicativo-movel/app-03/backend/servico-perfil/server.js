@@ -1,61 +1,63 @@
 require('dotenv').config();
-
-
 const express = require('express');
 const cors = require('cors');
-const db = require('./db'); // Importamos nossa conexão com o banco
+const multer = require('multer'); // Importando o Multer
+const db = require('./db');
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-// --- ENDPOINTS (Rotas da API) ---
+// Configuração do Multer para guardar a foto na memória RAM
+const upload = multer({ storage: multer.memoryStorage() });
 
-// GET /perfil (Consultar dados do operador)
+// GET: Consultar Perfil (Agora enviando a foto em Base64)
 app.get('/perfil/:id', async (req, res) => {
-  const { id } = req.params;
-  try {
-    const [linhas] = await db.query('SELECT id, nome, email, setor, turno FROM operadores WHERE id = ?', [id]);
-    if (linhas.length > 0) {
-      res.status(200).json(linhas[0]);
-    } else {
-      res.status(404).json({ error: "Operador não encontrado." });
+    try {
+        const [user] = await db.query('SELECT nome, email, setor, turno, foto FROM operadores WHERE id = ?', [req.params.id]);
+        
+        if (user.length === 0) return res.status(404).json({ error: "Usuário não encontrado" });
+
+        const operador = user[0];
+        
+        // Se houver foto no banco (BLOB), converte para Base64 para o React Native entender
+        if (operador.foto) {
+            operador.foto = operador.foto.toString('base64');
+        }
+
+        res.json(operador);
+    } catch (error) {
+        res.status(500).json({ error: "Erro ao buscar perfil" });
     }
-  } catch (erro) {
-    res.status(500).json({ error: "Erro ao consultar banco." });
-  }
 });
 
-// PUT /perfil (Atualizar dados do operador)
-app.put('/perfil', (req, res) => {
-  const { setor, turno } = req.body;
-  console.log(`[PERFIL] Atualizando setor para ${setor} e turno para ${turno}`);
-  
-  res.status(200).json({ message: "Dados atualizados com sucesso!" });
+// PATCH: Atualizar APENAS a foto (Usamos upload.single para extrair o arquivo)
+app.patch('/perfil/:id/foto', upload.single('foto'), async (req, res) => {
+    try {
+        const fotoBuffer = req.file ? req.file.buffer : null;
+        
+        if (!fotoBuffer) {
+            return res.status(400).json({ error: "Nenhuma foto foi enviada." });
+        }
+
+        await db.query('UPDATE operadores SET foto = ? WHERE id = ?', [fotoBuffer, req.params.id]);
+        res.json({ message: "Foto do crachá atualizada com sucesso!" });
+    } catch (error) {
+        res.status(500).json({ error: "Erro ao salvar a foto" });
+    }
 });
 
-//GET /status (Consultar status da fábrica)
-app.get('/status', (req, res) => {
-    console.log(`[PERFL] Consulta de status da fábrica solicitada.`);
-    
-    //Retorna o Status HTTP 200 com as informações operacionais da fábrica
-    res.status(200).json({
-        fabrica: "Unidade SENAI - Indústria 4.0",
-        status: "Operacional",
-        turnosAtivos: ["Manhã", "Tarde", "Noite"]
-    });
-
+// PUT: Atualizar Perfil (Setor e Turno)
+app.put('/perfil/:id', async (req, res) => {
+    const { setor, turno } = req.body;
+    await db.query('UPDATE operadores SET setor = ?, turno = ? WHERE id = ?', [setor, turno, req.params.id]);
+    res.json({ message: "Perfil atualizado com sucesso!" });
 });
 
-// DELETE /perfil (Remover operador do sistema)
-app.delete('/perfil', (req, res) => {
-  console.log(`[PERFIL] Solicitação de exclusão de conta recebida.`);
-  
-  res.status(200).json({ message: "Operador removido do sistema corporativo." });
+// DELETE: Excluir Perfil
+app.delete('/perfil/:id', async (req, res) => {
+    await db.query('DELETE FROM operadores WHERE id = ?', [req.params.id]);
+    res.json({ message: "Conta excluída." });
 });
 
-// Iniciando o servidor na Porta 3002
-const PORT = 3002;
-app.listen(PORT, () => {
-  console.log(`Serviço de Perfil rodando na porta ${PORT}`);
-});
+app.listen(3002, () => console.log('Serviço de Perfil rodando na porta 3002'));

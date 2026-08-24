@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, NavLink } from 'react-router-dom'; //HashRouter para evitar problemas de roteamento em servidores sem configuração
 import Inicio from './pages/inicio.jsx';
 import Sobre from './pages/sobre.jsx';
 import Portfolio from './pages/portfolio.jsx';

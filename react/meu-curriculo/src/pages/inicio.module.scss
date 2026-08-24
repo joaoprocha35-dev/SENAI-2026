@@ -98,7 +98,7 @@
 }
 
 .mainName {
-  font-size: clamp(3rem, vw, 4.5rem);
+  font-size: clamp(3rem, 5vw, 4.5rem);
   font-weight: 800;
   line-height: 1.05;
   color: var(--text-color);
@@ -135,31 +135,34 @@
 /* Container da Foto Central/Esquerda */
 .imageContainer {
   position: absolute;
-  bottom: 0;
-  /* Alterado para 45% para empurrar a imagem levemente para a esquerda */
+  top: 0;
   left: 45%; 
   transform: translateX(-50%);
-  /* Altura enorme solicitada, mantendo proporção da largura */
-  height: 92vh; 
+  height: 100vh; /* Mantém 100vh para que o cargo (Web Design) fique fixo no rodapé */
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: flex-start; /* Move o conteúdo para a parte superior do container */
+  padding-top: 22vh; /* Empurra a imagem para ficar logo abaixo do nome */
   width: 100%;
   max-width: 900px;
   z-index: 2;
 
   @include mobile-only {
     left: 50%;
-    height: 70vh;
+    padding-top: 28vh; /* Dá mais espaço no mobile devido à quebra de linha do título */
   }
 }
 
 .heroProfilePic {
-  height: 100%;
+  height: 40vh; /* Ajusta a altura da imagem para caber na caixa amarela de referência */
   width: auto;
   object-fit: contain;
-  object-position: bottom; /* Prende a imagem no fundo */
+  object-position: top; /* Ancara a imagem no topo */
   filter: drop-shadow(0 0 50px rgba(0, 255, 102, 0.15));
+
+  @include mobile-only {
+    height: 57vh; /* Menor no mobile para manter a proporção */
+  }
 }
 
 /* Textos sobrepostos no final da imagem */
@@ -192,13 +195,7 @@
   margin-top: -0.5rem;
 }
 
-.roleLarge {
-  font-size: clamp(3rem, 7vw, 5rem);
-  font-weight: 900;
-  color: var(--text-color);
-  line-height: 0.8;
-  @include text-neon-glow($neon-green);
-}
+
 
 /* ====================================================
    SESSÃO DE CONTEÚDO SCROLL
@@ -308,10 +305,34 @@
 
 .dot { color: var(--accent-color); }
 .subCategoryTitle { color: var(--accent-color); font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; }
-.skillsList { list-style: none; padding: 0; li { margin-bottom: 0.5rem; color: var(--text-color); display: flex; align-items: center; gap: 0.5rem; } }
+.skillsList { 
+  list-style: none; 
+  padding: 0; 
+  li { 
+    margin-bottom: 0.5rem; 
+    color: var(--text-color); 
+    display: flex; 
+    align-items: center; 
+    gap: 0.5rem; 
+  } 
+}
 .checkIcon { color: var(--accent-color); font-weight: bold; }
 .skillGroupTitle { font-size: 0.95rem; font-weight: 700; color: var(--text-color); margin-bottom: 0.4rem; }
-.bulletList { list-style: none; padding-left: 0; li { position: relative; padding-left: 1rem; margin-bottom: 0.5rem; &::before { content: "•"; position: absolute; left: 0; color: var(--accent-color); } } }
+.bulletList { 
+  list-style: none; 
+  padding-left: 0; 
+  li { 
+    position: relative; 
+    padding-left: 1rem; 
+    margin-bottom: 0.5rem; 
+    &::before { 
+      content: "•"; 
+      position: absolute; 
+      left: 0; 
+      color: var(--accent-color); 
+    } 
+  } 
+}
 .educationCard {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -325,4 +346,12 @@
 }
 .eduTitle { font-size: 1.05rem; font-weight: 700; color: var(--text-color); margin: 0; }
 .eduSub { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
-.badgeTag { background: rgba(0, 255, 102, 0.1); border: 1px solid var(--accent-color); padding: 0.35rem 0.75rem; border-radius: 6px; font-size: 0.8rem; color: var(--accent-color); font-weight: 600; }
+.badgeTag { 
+  background: rgba(0, 255, 102, 0.1); 
+  border: 1px solid var(--accent-color); 
+  padding: 0.35rem 0.75rem; 
+  border-radius: 6px; 
+  font-size: 0.8rem; 
+  color: var(--accent-color); 
+  font-weight: 600; 
+}
