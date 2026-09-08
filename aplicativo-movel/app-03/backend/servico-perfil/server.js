@@ -53,6 +53,33 @@ app.put('/perfil/:id', async (req, res) => {
     await db.query('UPDATE operadores SET setor = ?, turno = ? WHERE id = ?', [setor, turno, req.params.id]);
     res.json({ message: "Perfil atualizado com sucesso!" });
 });
+//POST /perfil/:id/checkin (Registra a localização GPS do operador)
+app.post('/perfil/:id/checkin', async (req, res) => {
+    const {id} = req.params;
+    const {latitude, longitude} = req.body;
+    
+    if (!latitude || !longitude) {
+        return res.status(400).json({error: 'Cordenadas GPS não informadas.'});
+    }
+
+    //Tratamento de erros 
+    try{
+        await db.query(
+            'INSERT INTO checkins_operador (operador_id, latitude, longitude) VALUES (?, ?, ?)',
+            [id, latitude, longitude]
+        );
+        
+        console.log(`[PERFIL] Check-in registrado para o Operador ID ${id} em Lat: ${latitude} e Lon: ${longitude}`);
+        res.status(201).json({message: 'Pressença confirmada no posto de trabalho com sucesso!'});
+
+    }catch (error){
+        console.error(erro);
+        res.status(500).json({error: 'Erro ao registrar check-in no banco de dados.'});
+    }
+});
+
+
+
 
 // DELETE: Excluir Perfil
 app.delete('/perfil/:id', async (req, res) => {
