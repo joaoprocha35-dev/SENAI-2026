@@ -14,15 +14,16 @@
       },
       "package": "com.senai.portaloperador"
     },
-    "extra": {
-      "eas": {
-        "projectId": "045e3915-356e-4beb-81ac-ed7abb4794ef"
-      }
-    },
-    "owner": "joaosenai",
     "plugins": [
       "expo-router",
       "expo-status-bar"
-    ]
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "fff4e511-217e-4cb8-bbd2-0f782145f3b0"
+      }
+    },
+    "owner": "rocha.jp"
   }
 }
