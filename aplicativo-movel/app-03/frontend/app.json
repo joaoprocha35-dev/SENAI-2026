@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "Portal do Operador",
+    "slug": "PortalOperador",
+    "scheme": "portaloperador",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#003366"
+      },
+      "package": "com.senai.portaloperador"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "045e3915-356e-4beb-81ac-ed7abb4794ef"
+      }
+    },
+    "owner": "joaosenai",
+    "plugins": [
+      "expo-router",
+      "expo-status-bar"
+    ]
+  }
+}
