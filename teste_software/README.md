@@ -1,0 +1,1 @@
+a pasta jest é um framework de Testes Unitarios
