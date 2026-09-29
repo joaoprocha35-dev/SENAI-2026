@@ -1,0 +1,81 @@
+/* Layout Principal e Container */
+body {
+  background-color: #f8f9fa;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.container {
+  max-width: 700px;
+}
+
+/* Card Principal */
+.card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.card-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Formulário e Inputs */
+.input-group .form-control {
+  border-radius: 8px 0 0 8px;
+  border: 1px solid #ced4da;
+  padding: 0.6rem 1rem;
+}
+
+.input-group .form-control:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+}
+
+.input-group .btn {
+  border-radius: 0 8px 8px 0;
+  padding: 0.6rem 1.2rem;
+  font-weight: 500;
+}
+
+/* Grid de Itens da Lista */
+.list-group-item {
+  display: grid;
+  grid-template-columns: 1fr auto; /* Texto ocupa o espaço restante, botões ficam alinhados à direita */
+  align-items: center;
+  gap: 12px;
+  padding: 1rem 1.25rem;
+  border-color: #f1f3f5;
+  transition: background-color 0.2s ease;
+}
+
+.list-group-item:hover {
+  background-color: #f8f9fa;
+}
+
+/* Responsividade do Grid em telas menores (celulares) */
+@media (max-width: 576px) {
+  .list-group-item {
+    grid-template-columns: 1fr; /* Em telas pequenas, texto fica em cima e botões embaixo */
+    gap: 8px;
+  }
+
+  .list-group-item > div {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+}
+
+/* Botões de Ação */
+.list-group-item .btn {
+  font-weight: 500;
+  border-radius: 6px;
+  padding: 0.25rem 0.6rem;
+}
+
+/* Texto e Transição ao concluir */
+.list-group-item span {
+  transition: all 0.2s ease;
+}

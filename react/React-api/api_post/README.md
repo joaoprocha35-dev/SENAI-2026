@@ -1,16 +1,15 @@
-# React + Vite
+🛠️ Sistema do Operador - Atividade SENAI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Atividade desenvolvida no curso do SENAI para praticar a integração de requisições HTTP do tipo **POST** com APIs usando React.
 
-Currently, two official plugins are available:
+## 🚀 Tecnologias Utilizadas
+- **React** (useState, manipulação de formulários e estados)
+- **Bootstrap** (estilização e layout responsivo)
+- **Fetch API** (envio de requisições POST)
+- **JSONPlaceholder** (API fake para testes de integração)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🎯 Funcionalidades
+- **Cadastro de Operador (RF01):** Envio de dados (nome, e-mail, senha e setor) via requisição `POST`.
+- **Login de Operador (RF02):** Simulação de autenticação com e-mail e senha via `POST`.
+- **Alternância de telas:** Navegação simples entre Login e Cadastro sem recarregar a página.
+- **Feedback visual:** Mensagens de carregando e retorno de sucesso/erro da API.

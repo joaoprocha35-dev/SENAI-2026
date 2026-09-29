@@ -42,9 +42,8 @@ function App() {
                 >
                   <span className="fw-medium text-secondary">{item.title}</span>
                   <span
-                    className={`badge ${
-                      item.completed ? 'bg-success' : 'bg-warning text-dark'
-                    }`}
+                    className={`badge ${item.completed ? 'bg-success' : 'bg-warning text-dark'
+                      }`}
                   >
                     {item.completed ? 'Concluída' : 'Pendente'}
                   </span>

@@ -1,0 +1,19 @@
+/* Estilo do container principal da página de detalhes */
+.detalhe-container {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+/* Card principal do prontuário com destaque na borda superior */
+.card-prontuario {
+  border: 1px solid #e0e0e0;
+  border-top: 5px solid #0d6efd; /* Linha azul no topo */
+  border-radius: 8px;
+  background-color: #ffffff;
+}
+
+/* Ajuste no tamanho do input de edição para dar destaque */
+.input-edicao {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
