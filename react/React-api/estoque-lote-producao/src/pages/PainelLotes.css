@@ -1,34 +1,122 @@
-/* Container geral para garantir fundo cinza claro e altura total */
+
+/* Container geral com fundo dark e altura total */
 .painel-container {
-  background-color: #f8f9fa;
+  background-color: #0b0f19;
   min-height: 100vh;
+  color: #e2e8f0;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-/* Card do lote com efeito visual de elevação ao passar o rato (hover) */
+/* Card do lote com elevação e brilho suave ao passar o mouse */
 .lote-card {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: linear-gradient(145deg, #151b2b, #101522);
+  border: 1px solid #252e42;
+  border-radius: 12px;
+  color: #e2e8f0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease,
+    background-color 0.3s ease;
+
+  animation: aparecer-card 0.5s ease both;
 }
 
+/* Efeito de elevação ao passar o mouse */
 .lote-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-5px);
+  border-color: #3b82f6;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.3),
+    0 0 15px rgba(59, 130, 246, 0.08);
 }
 
-/* Estilização personalizada das Badges exigidas pelo professor */
+/* Badge de lote aprovado */
 .badge-aprovado {
-  background-color: #198754; /* Verde Bootstrap (Success) */
-  color: #ffffff;
+  background-color: #064e3b;
+  color: #6ee7b7;
+  border: 1px solid rgba(52, 211, 153, 0.25);
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
+.badge-aprovado:hover {
+  background-color: #065f46;
+  box-shadow: 0 0 12px rgba(52, 211, 153, 0.15);
+}
+
+/* Badge de lote em inspeção */
 .badge-inspecao {
-  background-color: #ffc107; /* Amarelo Bootstrap (Warning) */
-  color: #000000;
+  background-color: #713f12;
+  color: #fde68a;
+  border: 1px solid rgba(251, 191, 36, 0.25);
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
-/* Destaque para o formulário de cadastro na parte superior */
+.badge-inspecao:hover {
+  background-color: #854d0e;
+  box-shadow: 0 0 12px rgba(251, 191, 36, 0.15);
+}
+
+/* Formulário de cadastro com destaque azul e fundo escuro */
 .form-cadastro-box {
-  border-left: 5px solid #0d6efd; /* Borda azul da marca */
-  background-color: #ffffff;
+  background: linear-gradient(145deg, #151b2b, #101522);
+  border: 1px solid #252e42;
+  border-left: 5px solid #3b82f6;
+  border-radius: 10px;
+  color: #e2e8f0;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+
+  animation: aparecer-card 0.6s ease both;
+}
+
+.form-cadastro-box:focus-within {
+  border-left-color: #60a5fa;
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.25),
+    0 0 18px rgba(59, 130, 246, 0.08);
+}
+
+/* Animação suave de entrada */
+@keyframes aparecer-card {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Respeita usuários que preferem movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+  .painel-container,
+  .lote-card,
+  .badge-aprovado,
+  .badge-inspecao,
+  .form-cadastro-box {
+    animation: none;
+    transition: none;
+  }
 }

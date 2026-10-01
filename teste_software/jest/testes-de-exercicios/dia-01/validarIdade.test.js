@@ -1,4 +1,4 @@
-const {validarIdade} = require('../validarIdade')
+const {validarIdade} = require('./validarIdade')
 
 test('Deve permitir o acesso para maiores de 18 anos', () => {
     expect(validarIdade(20)).toBe(true);

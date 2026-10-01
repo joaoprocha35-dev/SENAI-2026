@@ -1,19 +1,130 @@
-/* Estilo do container principal da página de detalhes */
+
+/* Container principal da página de detalhes */
 .detalhe-container {
-  background-color: #f8f9fa;
+  background-color: #0b0f19;
   min-height: 100vh;
+  color: #e2e8f0;
+  padding: 24px;
+
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
+
+  animation: detalhe-entrada 0.5s ease both;
 }
 
-/* Card principal do prontuário com destaque na borda superior */
+/* Card principal do prontuário */
 .card-prontuario {
-  border: 1px solid #e0e0e0;
-  border-top: 5px solid #0d6efd; /* Linha azul no topo */
-  border-radius: 8px;
-  background-color: #ffffff;
+  background: linear-gradient(145deg, #151b2b, #101522);
+  border: 1px solid #252e42;
+  border-top: 4px solid #3b82f6;
+  border-radius: 12px;
+  color: #e2e8f0;
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.2),
+    0 2px 6px rgba(0, 0, 0, 0.1);
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background-color 0.3s ease;
+
+  animation: detalhe-entrada 0.6s ease both;
 }
 
-/* Ajuste no tamanho do input de edição para dar destaque */
+/* Elevação suave ao passar o mouse */
+.card-prontuario:hover {
+  transform: translateY(-3px);
+  border-color: #34415c;
+  border-top-color: #60a5fa;
+
+  box-shadow:
+    0 14px 35px rgba(0, 0, 0, 0.3),
+    0 0 18px rgba(59, 130, 246, 0.06);
+}
+
+/* Campo de edição com destaque tipográfico */
 .input-edicao {
+  background-color: #0d1321;
+  color: #f1f5f9;
+  border: 1px solid #303b52;
+  border-radius: 8px;
+
   font-size: 1.1rem;
   font-weight: 500;
+  padding: 10px 14px;
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+/* Destaque ao selecionar o campo */
+.input-edicao:focus {
+  background-color: #111a2b;
+  color: #ffffff;
+  border-color: #3b82f6;
+  outline: none;
+
+  box-shadow:
+    0 0 0 3px rgba(59, 130, 246, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Aparência ao passar o mouse */
+.input-edicao:hover:not(:focus) {
+  border-color: #475569;
+}
+
+/* Cor do texto de placeholder */
+.input-edicao::placeholder {
+  color: #64748b;
+  opacity: 1;
+}
+
+/* Animação suave de entrada */
+@keyframes detalhe-entrada {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Acessibilidade: respeita preferência por movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+  .detalhe-container,
+  .card-prontuario,
+  .input-edicao {
+    animation: none;
+    transition: none;
+  }
+
+  .card-prontuario:hover {
+    transform: none;
+  }
+}
+
+/* Ajustes para telas menores */
+@media (max-width: 768px) {
+  .detalhe-container {
+    padding: 16px;
+  }
+
+  .card-prontuario {
+    border-radius: 10px;
+  }
+
+  .input-edicao {
+    font-size: 1rem;
+    padding: 10px 12px;
+  }
 }
