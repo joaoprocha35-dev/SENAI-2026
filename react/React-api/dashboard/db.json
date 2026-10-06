@@ -1,0 +1,11 @@
+{
+    "tarefas": [
+        {
+            "id": 1,
+            "title": "Lote 1",
+            "setor": "Setor A",
+            "quantidade": 100,
+            "completed": false
+        }
+    ]
+}
