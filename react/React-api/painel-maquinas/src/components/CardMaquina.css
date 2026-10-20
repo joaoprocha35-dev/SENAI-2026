@@ -1,0 +1,166 @@
+/* ==========================================================================
+   ESTILIZAÇÃO DO COMPONENTE: CARD MÁQUINA
+   ========================================================================== */
+
+/* 
+  1. ANIMAÇÃO: EFEITO CASCATA (FADE UP)
+  Cria o movimento suave do card surgindo de baixo para cima.
+*/
+@keyframes fadeUpCascade {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 
+  2. CONTAINER PRINCIPAL DO CARD
+  Sobrescreve a estrutura padrão com bordas suaves, sombra customizada e animação.
+*/
+.card-maquina-container {
+  max-width: 350px;
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid #eaeaea;
+  background-color: #ffffff;
+  
+  /* Sombra fluida em vez da sombra rígida padrão */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  /* Configuração para o Efeito Cascata */
+  opacity: 0; /* Começa invisível até a animação executar */
+  animation: fadeUpCascade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--delay, 0s); /* Lê a variável inline definida no React */
+}
+
+/* Microinteração de Hover: Levanta o card levemente */
+.card-maquina-container:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* 
+  3. CABEÇALHO E TIPOGRAFIA
+*/
+.maquina-titulo {
+  color: #2d3748;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.maquina-status-texto {
+  color: #718096;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+}
+
+/* 
+  4. BOTÃO DE EXCLUIR / DELETAR (TOP-RIGHT)
+  Visual discreto por padrão que se destaca em vermelho no hover.
+*/
+.btn-deletar-maquina {
+  background: transparent;
+  border: 1px solid #fee2e2;
+  color: #ef4444;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-deletar-maquina:hover {
+  background-color: #ef4444;
+  color: #ffffff;
+  border-color: #ef4444;
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3);
+}
+
+.btn-deletar-maquina:active {
+  transform: scale(0.95);
+}
+
+/* 
+  5. BADGES DE STATUS (SOFT COLORS)
+  Aplica contraste de alta acessibilidade com fundos suaves e textos escuros.
+*/
+.maquina-badge {
+  display: inline-block;
+  padding: 0.35em 0.85em;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+/* Estado: Ligada */
+.badge-ligada {
+  background-color: #d1fae5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+/* Estado: Desligada */
+.badge-desligada {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+/* 
+  6. BOTÃO PRINCIPAL DE AÇÃO (LIGAR / DESLIGAR)
+*/
+.maquina-btn {
+  width: 100%;
+  margin-top: 0.75rem;
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Estado: Botão Ligar (Ação verde) */
+.btn-ligar {
+  background-color: #10b981;
+  color: #ffffff;
+  box-shadow: 0 4px 6px rgba(16, 185, 129, 0.25);
+}
+
+.btn-ligar:hover {
+  background-color: #059669;
+  box-shadow: 0 6px 12px rgba(16, 185, 129, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-ligar:active {
+  transform: translateY(0);
+}
+
+/* Estado: Botão Desligar (Ação vermelha outline) */
+.btn-desligar {
+  background-color: transparent;
+  color: #ef4444;
+  border: 1.5px solid #ef4444;
+}
+
+.btn-desligar:hover {
+  background-color: #fef2f2;
+  border-color: #dc2626;
+  color: #dc2626;
+}
+
+.btn-desligar:active {
+  background-color: #fee2e2;
+}

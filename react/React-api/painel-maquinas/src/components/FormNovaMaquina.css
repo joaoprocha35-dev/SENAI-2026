@@ -1,0 +1,90 @@
+/* =========================================
+   ESTILIZAÇÃO DO COMPONENTE: FORM NOVA MÁQUINA
+   ========================================= */
+
+/* 
+  1. CONTAINER DO FORMULÁRIO
+  Uso de borda tracejada para dar o contexto visual de "área de inserção".
+  Fundo levemente acinzentado para destacar da cor de fundo principal da página.
+*/
+.form-nova-maquina-container {
+  background-color: #f8fafc; /* Cinza muito clarinho, quase branco */
+  border: 1.5px dashed #cbd5e1; /* Borda tracejada moderna */
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+/* Microinteração: ao passar o mouse, a borda fica sólida e sutilmente colorida */
+.form-nova-maquina-container:hover {
+  border-color: #94a3b8;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+/* 
+  2. TÍTULO DO FORMULÁRIO
+*/
+.form-titulo {
+  color: #334155;
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+}
+
+/* 
+  3. INPUT DE TEXTO CUSTOMIZADO
+  Substitui o form-control do Bootstrap por algo mais focado em UX, 
+  com melhor padding e transições suaves.
+*/
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #1e293b;
+  background-color: #ffffff;
+  outline: none; /* Remove o outline feio padrão do navegador */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box; /* Garante que o padding não quebre a largura */
+}
+
+/* Efeito de foco (quando o usuário clica para digitar) - Acessibilidade e UI */
+.form-input:focus {
+  border-color: #3b82f6; /* Azul moderno */
+  /* Cria uma "aura" ao redor do input mostrando que ele está ativo */
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15); 
+}
+
+/* Placeholder sutil */
+.form-input::placeholder {
+  color: #94a3b8;
+}
+
+/* 
+  4. BOTÃO DE SUBMIT (AÇÃO PRINCIPAL)
+  Cores fortes para guiar o olho do usuário para a ação principal (Call to Action).
+*/
+.form-btn-submit {
+  background-color: #3b82f6; /* Azul vibrante */
+  color: #ffffff;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 4px 6px rgba(59, 130, 246, 0.25);
+}
+
+/* Feedback de hover */
+.form-btn-submit:hover {
+  background-color: #2563eb; /* Azul mais escuro */
+  box-shadow: 0 6px 12px rgba(59, 130, 246, 0.35);
+}
+
+/* Feedback de clique (o botão "afunda" rapidinho) */
+.form-btn-submit:active {
+  transform: scale(0.98);
+}
